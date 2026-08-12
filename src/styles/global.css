@@ -24,12 +24,13 @@
 .controls .search{grid-area:search;width:auto}
 .category-filter{grid-area:category}
 .status-filter{grid-area:status}
+.manufacturer-filter{grid-area:manufacturer}
 .controls .search-button{grid-area:search-button;justify-self:center}
 @media(max-width:760px){
-  .controls{grid-template-columns:1fr 1fr;grid-template-areas:"category status" "search search" "search-button search-button";padding:14px}
+  .controls{grid-template-columns:1fr 1fr;grid-template-areas:"category status" "manufacturer manufacturer" "search search" "search-button search-button";padding:14px}
   .controls .search-button{width:max-content}
 }
 @media(min-width:761px){
-  .controls{grid-template-columns:minmax(0,1fr) 196px 162px 150px;grid-template-areas:"search category status search-button";padding-bottom:14px;align-items:end}
+  .controls{grid-template-columns:minmax(0,1fr) 180px 162px 180px 150px;grid-template-areas:"search category status manufacturer search-button";padding-bottom:14px;align-items:end}
   .controls .search-button{width:100%;min-width:0}
 }

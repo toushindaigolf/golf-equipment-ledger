@@ -27,4 +27,5 @@ export const manufacturers = [
   'ロイヤルコレクション',
   'ロマロ',
   'リンクス',
+  'その他',
 ] as const;
