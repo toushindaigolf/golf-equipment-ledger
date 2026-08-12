@@ -26,6 +26,6 @@
 .status-filter{grid-area:status}
 .controls .search-button{grid-area:search-button;justify-self:center}
 @media(max-width:760px){
-  .controls{grid-template-columns:1fr 1fr;grid-template-areas:"category status" "search-button search-button" "search search";padding:14px}
+  .controls{grid-template-columns:1fr 1fr;grid-template-areas:"category status" "search search" "search-button search-button";padding:14px}
   .controls .search-button{width:max-content}
 }
