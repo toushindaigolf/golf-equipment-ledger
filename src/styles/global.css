@@ -9,3 +9,5 @@
   .panel{align-self:flex-start;width:100%;max-height:calc(100vh - 28px);max-height:calc(100dvh - 28px);border-radius:14px;padding:22px 18px;overscroll-behavior:contain;touch-action:pan-y}
   .form-actions{bottom:0;padding:14px 0 calc(2px + env(safe-area-inset-bottom));margin-bottom:calc(-1 * env(safe-area-inset-bottom))}
 }
+/* Search is applied explicitly from the centered action button. */
+.search-button{justify-self:center;min-width:120px}
