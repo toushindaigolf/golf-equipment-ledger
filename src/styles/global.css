@@ -11,3 +11,9 @@
 }
 /* Search is applied explicitly from the centered action button. */
 .search-button{justify-self:center;min-width:120px}
+.controls .search{order:1}
+.category-filter{order:2}
+.status-filter{order:3}
+.sort-control{display:grid;gap:5px;color:#53625c;font-size:.78rem;font-weight:700}
+.sort-control select{min-width:180px}
+@media(max-width:760px){.sort-control{min-width:145px}.sort-control select{min-width:0;width:100%}}
