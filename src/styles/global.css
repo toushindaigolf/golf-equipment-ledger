@@ -29,3 +29,7 @@
   .controls{grid-template-columns:1fr 1fr;grid-template-areas:"category status" "search search" "search-button search-button";padding:14px}
   .controls .search-button{width:max-content}
 }
+@media(min-width:761px){
+  .controls{grid-template-columns:minmax(0,1fr) 196px 162px 150px;grid-template-areas:"search category status search-button";padding-bottom:14px;align-items:end}
+  .controls .search-button{width:100%;min-width:0}
+}
