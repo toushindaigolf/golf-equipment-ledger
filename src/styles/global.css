@@ -17,3 +17,15 @@
 .sort-control{display:grid;gap:5px;color:#53625c;font-size:.78rem;font-weight:700}
 .sort-control select{min-width:180px}
 @media(max-width:760px){.sort-control{min-width:145px}.sort-control select{min-width:0;width:100%}}
+
+/* Search controls share one predictable layout on desktop and mobile. */
+.controls{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 196px 162px;grid-template-areas:"search category status" "search-button search-button search-button";align-items:end;row-gap:12px;padding-bottom:62px}
+.search-group{display:contents}
+.controls .search{grid-area:search;width:auto}
+.category-filter{grid-area:category}
+.status-filter{grid-area:status}
+.controls .search-button{grid-area:search-button;justify-self:center}
+@media(max-width:760px){
+  .controls{grid-template-columns:1fr 1fr;grid-template-areas:"category status" "search-button search-button" "search search";padding:14px}
+  .controls .search-button{width:max-content}
+}
