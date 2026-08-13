@@ -34,3 +34,45 @@
   .controls{grid-template-columns:minmax(0,1fr) 180px 162px 180px 150px;grid-template-areas:"search category status manufacturer search-button";padding-bottom:14px;align-items:end}
   .controls .search-button{width:100%;min-width:0}
 }
+
+/* Color system: navy primary, terracotta accent, green as a restrained brand support color. */
+:root{--navy:#26384d;--navy-dark:#1d2d40;--terracotta:#b86f54;--terracotta-dark:#98563f;--charcoal:#2d343b;--line:#dbe2e8;--line-soft:#e9eef2;--surface:#fff;--surface-soft:#f7f9fb;--green-support:#5e8274;--green-soft:#e5eee9}
+body{color:var(--charcoal);background:#fff}
+h1,h2{color:var(--navy)}
+.brand{color:var(--green-support)}
+.eyebrow{color:var(--navy)}
+.primary{background:var(--navy);color:#fff;box-shadow:0 2px 7px #26384d2b}
+.primary:hover{background:var(--navy-dark)}
+.text-button{color:var(--navy);border-color:var(--navy)}
+.text-button:hover{background:#eef2f6}
+.secondary{border-color:#c7d1da;color:var(--navy)}
+.summary-card{background:var(--surface);border-color:var(--line)}
+.summary-card.purchase{border-top-color:#8da1b5}
+.summary-card.sales{border-top-color:var(--terracotta)}
+.summary-card.net{border-top-color:var(--navy)}
+.summary-card.owned{border-top-color:var(--green-support)}
+.summary-card p{color:#68747f}
+.controls,.list{background:var(--surface);border-color:var(--line)}
+.controls label,.sort-control{color:#465362}
+input,select,textarea{border-color:#cbd5df;color:var(--charcoal);background:#fff;outline-color:var(--navy)}
+.list-head{border-bottom-color:var(--line-soft)}
+th{background:var(--surface-soft);color:#5d6975}
+th,td{border-bottom-color:var(--line-soft)}
+td b{color:var(--charcoal)}
+.status.in_use{background:var(--green-soft);color:#3f6758}
+.status.stored{background:#edf0f3;color:#5c6873}
+.status.sold{background:#f2e4de;color:#8d5442}
+.row-actions button,.card-actions button{color:var(--navy)}
+.danger-link{color:var(--terracotta-dark)!important}
+.empty p{color:#68747f}
+.overlay{background:#1d2d4088}
+.panel{background:#fff;box-shadow:0 18px 50px #1d2d4038}
+.icon-button{background:#eef2f5;color:var(--navy)}
+.form-grid label{color:#465362}
+.form-grid b{color:var(--terracotta-dark)}
+.form-grid small{color:#68747f}
+.detail dl div{border-bottom-color:var(--line-soft)}
+.detail dt{color:#68747f}
+.mobile-cards .item-card{border-bottom-color:var(--line-soft)}
+.price-line{border-top-color:var(--line-soft)}
+.price-line span+span{color:#68747f}
