@@ -110,4 +110,5 @@ input,select,textarea{font-weight:400;letter-spacing:.01em}
   .panel{width:100%;max-width:100%;min-width:0;margin-inline:auto}
   .form-grid,.form-grid label,.form-actions{width:100%;min-width:0}
   .form-grid input,.form-grid select,.form-grid textarea{width:100%;min-width:0;max-width:100%}
+  .form-grid input[type="date"]{-webkit-appearance:none;appearance:none;display:block;width:100%;min-width:0;max-width:100%}
 }
