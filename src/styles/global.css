@@ -95,5 +95,7 @@ input,select,textarea{font-weight:400;letter-spacing:.01em}
 
 /* Form rows: reserve the required-label line so paired controls share the same top edge. */
 .form-grid label{grid-template-rows:auto 28px auto}
+.form-grid label > b{grid-row:2}
 .form-grid label > :is(input,select,textarea){grid-row:3}
 .form-grid label > select + input,.form-grid label > small{grid-row:4}
+.form-grid label:not(:has(> b))::after{content:'';grid-row:2;min-height:28px}
