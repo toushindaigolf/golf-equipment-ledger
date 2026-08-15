@@ -1,7 +1,8 @@
 {
   "name": "ゴルフ用品購入記録",
   "short_name": "ゴルフ用品記録",
-  "start_url": "/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#243B53",
