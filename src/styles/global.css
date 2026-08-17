@@ -112,3 +112,13 @@ input,select,textarea{font-weight:400;letter-spacing:.01em}
   .form-grid input,.form-grid select,.form-grid textarea{width:100%;min-width:0;max-width:100%}
   .form-grid input[type="date"]{-webkit-appearance:none;appearance:none;display:block;width:100%;min-width:0;max-width:100%}
 }
+
+/* Mobile header actions: feature the primary action, then place utilities side by side. */
+@media(max-width:760px){
+  header{display:flex;flex-direction:column;align-items:stretch;gap:16px;min-height:0}
+  .header-actions{position:static;width:100%;max-width:none;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"add add" "backup restore";gap:8px}
+  .header-actions .add{grid-area:add;width:100%;min-height:48px;padding:12px 14px;white-space:nowrap}
+  .header-actions .text-button{width:100%;min-height:44px;padding:10px 8px;white-space:nowrap}
+  .header-actions .text-button:first-of-type{grid-area:backup}
+  .header-actions .text-button:nth-of-type(2){grid-area:restore}
+}
