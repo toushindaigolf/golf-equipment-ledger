@@ -34,7 +34,7 @@ describe('equipmentRepository', () => {
     storage.setItem(EQUIPMENT_STORAGE_KEY, raw);
     const repository = createEquipmentRepository(storage);
 
-    expect(repository.getAll()[0]).toMatchObject({ salePrice: 0, status: 'in_use' });
+    expect(repository.getAll()[0]).toMatchObject({ salePrice: 0, saleDate: '', status: 'in_use' });
     expect(storage.getItem(EQUIPMENT_STORAGE_KEY)).toBe(raw);
   });
 
@@ -52,6 +52,7 @@ describe('equipmentRepository', () => {
       purchasePlace: '',
       purchaseReason: '',
       salePrice: 0,
+      saleDate: '',
       status: 'stored',
       memo: '',
     });

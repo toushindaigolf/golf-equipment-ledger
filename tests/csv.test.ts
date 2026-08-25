@@ -19,5 +19,6 @@ describe('equipmentToCsv', () => {
     expect(csv).toContain('"カンマ, 改行\n引用符 ""テスト"""');
     expect(csv).toContain(',50000,');
     expect(csv).toContain(',12000,');
+    expect(csv).toContain(',12000,2026-08-26,');
   });
 });

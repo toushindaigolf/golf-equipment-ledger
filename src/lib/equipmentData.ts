@@ -1,6 +1,6 @@
 import type { EquipmentStatus, GolfEquipment } from '../types/equipment';
 
-export const EQUIPMENT_SCHEMA_VERSION = 1 as const;
+export const EQUIPMENT_SCHEMA_VERSION = 2 as const;
 export const LEGACY_EQUIPMENT_SCHEMA_VERSION = 0 as const;
 export const DEMO_EQUIPMENT_IDS = ['demo-1', 'demo-2'] as const;
 
@@ -67,6 +67,10 @@ const normalizeEquipment = (value: unknown, index: number): NormalizeResult => {
   if (purchaseDate && !/^\d{4}-\d{2}-\d{2}$/.test(purchaseDate)) {
     return { ok: false, error: `items[${index}].purchaseDate must use YYYY-MM-DD` };
   }
+  const saleDate = optionalString(value.saleDate);
+  if (saleDate && !/^\d{4}-\d{2}-\d{2}$/.test(saleDate)) {
+    return { ok: false, error: `items[${index}].saleDate must use YYYY-MM-DD` };
+  }
   const createdAt = optionalString(value.createdAt, timestampFallback(purchaseDate));
   const status = equipmentStatuses.includes(value.status as EquipmentStatus)
     ? (value.status as EquipmentStatus)
@@ -82,6 +86,7 @@ const normalizeEquipment = (value: unknown, index: number): NormalizeResult => {
     purchasePlace: optionalString(value.purchasePlace),
     purchaseReason: optionalString(value.purchaseReason),
     salePrice,
+    saleDate,
     status,
     memo: optionalString(value.memo),
     createdAt,

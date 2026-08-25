@@ -3,6 +3,7 @@ dist/
 .wrangler/
 pnpm-lock.yaml
 .npm-cache/
+.pnpm-store/
 work/npm-cli/
 dev-server*.log
 .env

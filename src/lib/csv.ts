@@ -1,6 +1,6 @@
 import type { EquipmentStatus, GolfEquipment } from '../types/equipment';
 
-const headers = ['道具名', 'カテゴリ', 'メーカー', '購入日', '購入価格', '購入場所', '売却価格', 'ステータス', 'メモ'];
+const headers = ['道具名', 'カテゴリ', 'メーカー', '購入日', '購入価格', '購入場所', '売却価格', '売却日', 'ステータス', 'メモ'];
 
 const escapeCsvValue = (value: string | number) => {
   const text = String(value ?? '');
@@ -20,6 +20,7 @@ export const equipmentToCsv = (
     item.purchasePrice,
     item.purchasePlace,
     item.salePrice,
+    item.saleDate,
     statusLabel(item.status),
     item.memo,
   ]);

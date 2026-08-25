@@ -10,6 +10,7 @@ export const currentEquipment: GolfEquipment = {
   purchasePlace: 'テストショップ',
   purchaseReason: 'テスト用',
   salePrice: 12000,
+  saleDate: '2026-08-26',
   status: 'sold',
   memo: 'カンマ, 改行\n引用符 "テスト"',
   createdAt: '2026-08-25T00:00:00.000Z',

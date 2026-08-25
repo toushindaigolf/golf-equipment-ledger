@@ -32,9 +32,23 @@ describe('parseEquipmentData', () => {
       purchaseReason: '',
       purchasePrice: 24000,
       salePrice: 0,
+      saleDate: '',
       status: 'in_use',
       memo: '',
     });
+  });
+
+  it('accepts an older versioned record without a sale date', () => {
+    const { saleDate: _saleDate, ...previousItem } = currentEquipment;
+    const result = parseEquipmentData({ schemaVersion: 1, items: [previousItem] });
+
+    expect(result.ok).toBe(true);
+    if (result.ok) expect(result.items[0].saleDate).toBe('');
+  });
+
+  it('rejects an invalid sale date', () => {
+    const result = parseEquipmentData([{ ...currentEquipment, saleDate: '2026/08/26' }]);
+    expect(result.ok).toBe(false);
   });
 
   it('accepts an empty data set', () => {

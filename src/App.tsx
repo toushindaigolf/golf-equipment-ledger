@@ -13,7 +13,7 @@ import type { GolfEquipment, SortOption } from './types/equipment';
 const sortLabels: Record<SortOption, string> = { newest: '購入日の新しい順', oldest: '購入日の古い順', price_desc: '購入価格の高い順', price_asc: '購入価格の安い順' };
 
 function Detail({ item, onClose, onEdit }: { item: GolfEquipment; onClose: () => void; onEdit: () => void }) {
-  const fields = [['カテゴリ', categoryName(item.categoryId)], ['メーカー', item.manufacturer], ['購入日', date(item.purchaseDate)], ['購入価格', yen(item.purchasePrice)], ['売却価格', yen(item.salePrice)], ['購入場所', item.purchasePlace], ['購入理由', item.purchaseReason], ['メモ', item.memo]];
+  const fields = [['カテゴリ', categoryName(item.categoryId)], ['メーカー', item.manufacturer], ['購入日', date(item.purchaseDate)], ['購入価格', yen(item.purchasePrice)], ['売却価格', yen(item.salePrice)], ['売却日', item.saleDate ? date(item.saleDate) : ''], ['購入場所', item.purchasePlace], ['購入理由', item.purchaseReason], ['メモ', item.memo]];
   return <div className="overlay" onMouseDown={e => { if (e.target === e.currentTarget) onClose(); }}><section className="panel detail" role="dialog" aria-modal="true" aria-label="用品の詳細"><div className="panel-head"><div><p className="eyebrow">{categoryName(item.categoryId)}</p><h2>{item.name}</h2></div><button className="icon-button" onClick={onClose} aria-label="閉じる">×</button></div><span className={'status ' + item.status}>{statusName(item.status)}</span><dl>{fields.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value || '—'}</dd></div>)}</dl><div className="form-actions"><button className="secondary" onClick={onClose}>閉じる</button><button className="primary" onClick={onEdit}>編集する</button></div></section></div>;
 }
 
