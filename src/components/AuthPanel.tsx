@@ -44,7 +44,7 @@ function AuthDialog({ auth, onClose }: { auth: AuthState; onClose: () => void })
         {auth.notice && <p className="auth-message notice" role="status">{auth.notice}</p>}
         <button className="primary auth-submit" type="submit" disabled={busy}>{busy ? '処理中…' : mode === 'sign-in' ? 'ログインする' : 'アカウントを作成'}</button>
       </form>
-      <p className="auth-local-note">Phase 2では、ログイン後も用品データはこの端末のみに保存されます。</p>
+      <p className="auth-local-note">ログイン後の用品データはクラウドへ保存されます。端末内データは自動移行されません。</p>
     </section>
   </div>;
 }

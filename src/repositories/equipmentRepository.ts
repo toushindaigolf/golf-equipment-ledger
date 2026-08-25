@@ -1,5 +1,6 @@
 import type { EquipmentInput, GolfEquipment } from '../types/equipment';
 import { parseEquipmentData } from '../lib/equipmentData';
+import type { EquipmentDataRepository } from './equipmentDataRepository';
 
 export const EQUIPMENT_STORAGE_KEY = 'golf-equipment-ledger-v1';
 
@@ -62,3 +63,25 @@ export const equipmentRepository = createEquipmentRepository({
   getItem: key => localStorage.getItem(key),
   setItem: (key, value) => localStorage.setItem(key, value),
 });
+
+export const localEquipmentDataRepository: EquipmentDataRepository = {
+  source: 'local',
+  async getAll() {
+    return equipmentRepository.getAll();
+  },
+  async create(input) {
+    return equipmentRepository.create(input);
+  },
+  async update(id, input) {
+    const items = equipmentRepository.update(id, input);
+    const updated = items.find(item => item.id === id);
+    if (!updated) throw new Error('更新する用品が見つかりません。');
+    return updated;
+  },
+  async remove(id) {
+    equipmentRepository.remove(id);
+  },
+  async restore(items) {
+    return equipmentRepository.restore(items);
+  },
+};

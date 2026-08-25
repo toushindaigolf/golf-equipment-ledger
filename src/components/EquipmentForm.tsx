@@ -8,7 +8,7 @@ import type { EquipmentInput, EquipmentStatus, GolfEquipment } from '../types/eq
 const empty: EquipmentInput = { name: '', categoryId: 'driver', manufacturer: '', purchaseDate: new Date().toISOString().slice(0, 10), purchasePrice: 0, purchasePlace: '', purchaseReason: '', salePrice: 0, saleDate: '', status: 'in_use', memo: '' };
 const isShaftManufacturer = (value: string) => shaftManufacturers.includes(value as typeof shaftManufacturers[number]) && value !== 'その他';
 
-export function EquipmentForm({ item, onSave, onClose }: { item?: GolfEquipment; onSave: (v: EquipmentInput) => void; onClose: () => void }) {
+export function EquipmentForm({ item, saving = false, onSave, onClose }: { item?: GolfEquipment; saving?: boolean; onSave: (v: EquipmentInput) => void | Promise<void>; onClose: () => void }) {
   const initial = item ? (({ id, createdAt, updatedAt, ...value }) => value)(item) : empty;
   const [form, setForm] = useState<EquipmentInput>(initial);
   const [shaftOther, setShaftOther] = useState(item?.categoryId === 'shaft' && Boolean(item.manufacturer) && !isShaftManufacturer(item.manufacturer));
@@ -33,7 +33,7 @@ export function EquipmentForm({ item, onSave, onClose }: { item?: GolfEquipment;
   const numericValue = (value: number) => value === 0 ? '' : String(value);
   const shaftCategory = form.categoryId === 'shaft';
   const displayedManufacturer = shaftCategory && shaftOther ? 'その他' : form.manufacturer;
-  const submit = (event: React.FormEvent) => { event.preventDefault(); onSave({ ...form, manufacturer: shaftCategory && shaftOther ? customShaftManufacturer || 'その他' : form.manufacturer }); };
+  const submit = (event: React.FormEvent) => { event.preventDefault(); if (!saving) void onSave({ ...form, manufacturer: shaftCategory && shaftOther ? customShaftManufacturer || 'その他' : form.manufacturer }); };
   const changeCategory = (value: string) => { set('categoryId', value); if (value !== 'shaft') { setShaftOther(false); setCustomShaftManufacturer(''); } else if (form.manufacturer === 'その他') { setShaftOther(true); setCustomShaftManufacturer(''); } else if (form.manufacturer && !isShaftManufacturer(form.manufacturer)) { setShaftOther(true); setCustomShaftManufacturer(form.manufacturer); } else { setShaftOther(false); setCustomShaftManufacturer(''); } };
   const changeShaftManufacturer = (value: string) => { const other = value === 'その他'; setShaftOther(other); if (other) { setCustomShaftManufacturer(customShaftManufacturer || (isShaftManufacturer(form.manufacturer) ? '' : form.manufacturer)); set('manufacturer', 'その他'); } else set('manufacturer', value); };
 

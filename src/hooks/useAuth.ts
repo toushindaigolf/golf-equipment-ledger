@@ -52,7 +52,7 @@ export function useAuth() {
     setOperation('sign-in');
     try {
       await signInWithEmail(supabase, email, password);
-      setNotice('ログインしました。用品データは引き続きこの端末に保存されます。');
+      setNotice('ログインしました。クラウド上の用品データを読み込みます。端末内データは削除されません。');
       return true;
     } catch (caught) {
       setError(authErrorMessage(caught));
