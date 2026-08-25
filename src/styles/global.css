@@ -152,3 +152,52 @@ input,select,textarea{font-weight:400;letter-spacing:.01em}
 @media(prefers-reduced-motion:reduce){
   .mobile-cards .item-card{animation:none;transform:none}
 }
+
+/* Phase 1 analytics: dependency-free annual summaries and compact CSS charts. */
+.analytics{margin-bottom:28px;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.analytics-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:18px}
+.analytics-kicker{margin:0 0 5px;color:var(--terracotta-dark);font-size:.72rem;font-weight:500;letter-spacing:.11em}
+.analytics-year{display:grid;gap:5px;color:#465362;font-size:.78rem;font-weight:500}
+.analytics-year select{min-width:130px}
+.analytics-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.analytics-metric{min-width:0;padding:15px 16px;background:var(--surface-soft);border:1px solid var(--line-soft);border-radius:9px}
+.analytics-metric span{display:block;margin-bottom:5px;color:#68747f;font-size:.75rem;font-weight:500}
+.analytics-metric strong{display:block;overflow-wrap:anywhere;color:var(--navy);font-size:1.05rem;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.analytics-charts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.analytics-chart-panel{min-width:0;padding:18px;background:var(--surface-soft);border:1px solid var(--line-soft);border-radius:10px}
+.analytics-chart-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.analytics-chart-head h3{margin:0;color:var(--navy);font-size:.95rem;font-weight:600}
+.analytics-chart-head span{color:#68747f;font-size:.72rem;white-space:nowrap}
+.analytics-empty{display:grid;place-items:center;min-height:190px;margin:0;color:#68747f;font-size:.82rem;text-align:center}
+.monthly-chart{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:end;gap:5px;min-height:190px;margin:0;padding:0;list-style:none}
+.monthly-chart li{display:grid;grid-template-rows:24px 128px 20px;align-items:end;min-width:0;text-align:center}
+.monthly-value{overflow:hidden;color:#68747f;font-size:.58rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.monthly-track{display:flex;align-items:flex-end;width:100%;height:120px;overflow:hidden;background:#e8edf2;border-radius:4px 4px 2px 2px}
+.monthly-track>span{display:block;width:100%;min-height:2px;background:var(--navy);border-radius:4px 4px 0 0;transition:height 300ms ease}
+.monthly-label{align-self:end;color:#5d6975;font-size:.62rem;white-space:nowrap}
+.category-chart{display:grid;align-content:start;gap:12px;min-height:190px;margin:0;padding:0;list-style:none}
+.category-chart li>div{display:flex;justify-content:space-between;gap:12px;margin-bottom:5px;color:#4f5c68;font-size:.76rem}
+.category-chart li strong{color:var(--navy);font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.category-track{display:block;height:8px;overflow:hidden;background:#e8edf2;border-radius:999px}
+.category-track>span{display:block;height:100%;background:var(--terracotta);border-radius:inherit;transition:width 300ms ease}
+.analytics-note{margin:14px 0 0;color:#68747f;font-size:.72rem;line-height:1.6}
+
+@media(max-width:760px){
+  .analytics{padding:18px 14px}
+  .analytics-head{align-items:end;margin-bottom:15px}
+  .analytics-year select{min-width:112px;width:112px}
+  .analytics-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .analytics-metric{padding:13px 12px}
+  .analytics-metric strong{font-size:.98rem}
+  .analytics-charts{grid-template-columns:1fr}
+  .analytics-chart-panel{padding:15px 12px}
+  .monthly-chart{gap:3px}
+  .monthly-value{font-size:.54rem}
+  .monthly-label{font-size:.58rem}
+  .category-chart{min-height:0}
+  .analytics-empty{min-height:130px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .monthly-track>span,.category-track>span{transition:none}
+}
