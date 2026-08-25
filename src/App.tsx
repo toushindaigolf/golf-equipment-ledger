@@ -6,6 +6,7 @@ import { shaftManufacturers } from './data/shaftManufacturers';
 import { statusName, statuses } from './data/statuses';
 import { useEquipment } from './hooks/useEquipment';
 import { equipmentToCsv } from './lib/csv';
+import { parseEquipmentData } from './lib/equipmentData';
 import { date, summary, yen } from './lib/format';
 import type { GolfEquipment, SortOption } from './types/equipment';
 
@@ -33,7 +34,7 @@ export default function App() {
   const close = () => { setFormOpen(false); setEditing(undefined); };
   const exportJson = () => { const blob = new Blob([JSON.stringify(items, null, 2)], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `golf-equipment-backup-${new Date().toISOString().slice(0, 10)}.json`; a.click(); URL.revokeObjectURL(url); };
   const exportCsv = () => { const csv = equipmentToCsv(items, categoryName, statusName); const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `golf-equipment-ledger-${new Date().toISOString().slice(0, 10)}.csv`; a.click(); URL.revokeObjectURL(url); };
-  const importJson = (file?: File) => { if (!file) return; const reader = new FileReader(); reader.onload = () => { try { const data = JSON.parse(String(reader.result)); if (!Array.isArray(data)) throw new Error(); if (confirm(`${data.length}件のデータで現在の記録を置き換えます。よろしいですか？`)) restore(data); } catch { alert('有効なバックアップJSONを選択してください。'); } finally { if (fileRef.current) fileRef.current.value = ''; } }; reader.readAsText(file); };
+  const importJson = (file?: File) => { if (!file) return; const reader = new FileReader(); reader.onload = () => { try { const parsed = parseEquipmentData(JSON.parse(String(reader.result))); if (!parsed.ok) throw new Error(parsed.errors.join(', ')); if (confirm(`${parsed.items.length}件のデータで現在の記録を置き換えます。よろしいですか？`)) restore(parsed.items); } catch { alert('有効なバックアップJSONを選択してください。データ形式と必須項目を確認してください。'); } finally { if (fileRef.current) fileRef.current.value = ''; } }; reader.readAsText(file); };
   const removeItem = (item: GolfEquipment) => { if (confirm(`「${item.name}」を削除します。この操作は元に戻せません。`)) remove(item.id); };
   const categoryOptions = <>{categories.map(([id, name]) => <option value={id} key={id}>{name}</option>)}</>;
   const statusOptions = <>{statuses.map(s => <option value={s.id} key={s.id}>{s.name}</option>)}</>;

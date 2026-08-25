@@ -17,6 +17,16 @@ npm run build
 
 `dist/` に静的ファイルが出力されます。初回はサンプル2件を表示し、登録・編集・削除・JSONバックアップと復元に対応しています。
 
+## 回帰テスト
+
+```bash
+npm test
+```
+
+Free版の確認対象は、用品の登録・一覧・詳細・編集・削除、検索・カテゴリー/メーカー/ステータス絞り込み、並び替え、基本集計、JSONバックアップ/復元、CSV出力、PWA設定です。
+
+用品データは既存のlocalStorageキー `golf-equipment-ledger-v1` と配列形式を維持します。読み込み時にruntime validationと旧データのdefault補完を行いますが、読み込んだだけではlocalStorageを書き換えません。`demo-1` と `demo-2` は将来のクラウド移行対象から除外できるよう識別しています。
+
 ## GitHub Pages 公開
 
 `vite.config.ts` は相対パス（`base: './'`）で設定済みです。リポジトリにpush後、GitHub Actions等で `npm ci && npm run build` を実行し、生成された `dist/` をGitHub Pagesへ公開してください。プロジェクトサイトのURLを使う場合も、相対パス指定のため追加のbase変更は不要です。
