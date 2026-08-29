@@ -16,28 +16,28 @@ function PrivacyPolicy({ contactConfigured }: { contactConfigured: boolean }) {
     </div>
     <h3>1. 収集・保存する情報</h3>
     <ul>
-      <li>アカウント作成・認証に用いるメールアドレス、Supabase AuthのユーザーID</li>
+      <li>アカウント作成・認証に用いるメールアドレス、Supabase AuthのユーザーID（認証で使う識別番号）</li>
       <li>道具名、カテゴリー、メーカー、購入日・購入価格、売却日・売却価格、購入場所、購入理由、ステータス、メモなどの用品登録情報</li>
-      <li>未ログイン利用時にブラウザのlocalStorageへ保存される用品データ</li>
-      <li>ログイン・クラウド保存利用時にSupabaseへ保存される用品データ</li>
+      <li>ログインしていないときに、ブラウザのlocalStorage（この端末のブラウザ保存領域）へ保存される用品データ</li>
+      <li>ログインしてクラウド保存を利用するときに、Supabase（クラウドの保存サービス）へ保存される用品データ</li>
       <li>問い合わせ時に、利用者がGoogleフォームへ入力・送信する情報</li>
     </ul>
     <p>現時点で、本サービス独自のアクセス解析、広告配信および広告Cookieは実装していません。</p>
     <h3>2. 利用目的</h3>
     <ul>
       <li>アカウント認証、用品データの保存・表示、複数端末での利用のため</li>
-      <li>端末内データをSupabaseへ明示的に移行するため</li>
+      <li>端末内データをクラウド（Supabase）へ明示的に移行するため</li>
       <li>問い合わせ対応、不正利用・障害への対応、サービス改善のため</li>
     </ul>
     <h3>3. 利用する外部サービス</h3>
     <ul>
-      <li>Supabase：認証、クラウド上の用品データおよび利用プラン情報の管理</li>
+      <li>Supabase：ログイン認証、クラウド上の用品データおよび利用プラン情報の管理</li>
       <li>Cloudflare Pages：本サービスのWebアプリの配信</li>
-      <li>Google Forms：問い合わせフォーム（設定・公開後に利用）</li>
+      <li>Googleフォーム：問い合わせ窓口（設定・公開後に利用）</li>
     </ul>
     <p>各外部サービスにおける情報の取り扱いは、各サービス提供者の規約・ポリシーも適用されます。[要確認：各サービスの最新規約]</p>
     <h3>4. データの保存場所</h3>
-    <p>未ログイン時の用品データは、主に利用中のブラウザのlocalStorageへ保存されます。ログイン時の用品データはSupabaseのデータベースへ保存されます。</p>
+    <p>ログインしていないときの用品データは、主に利用中のブラウザのlocalStorage（この端末のブラウザ保存領域）へ保存されます。ログインしてクラウド保存を利用するときは、Supabaseのデータベースへ保存されます。</p>
     <p>現在は移行期間中のため、ログイン済みのFreeユーザーもクラウド保存を利用できる場合があります。端末内データはログインだけでは自動移行されず、利用者による明示的な移行操作が必要です。</p>
     <h3>5. データとアカウントの削除</h3>
     <p>用品データは一覧画面から個別に削除できます。現在、アプリ内からのアカウント削除機能は実装していません。アカウントやクラウドデータの削除を希望する場合は、問い合わせフォームからご連絡ください。</p>
@@ -63,7 +63,7 @@ function Terms({ contactConfigured }: { contactConfigured: boolean }) {
       <li>パスワードを問い合わせフォームへ入力・送信しないでください。</li>
     </ul>
     <h3>3. データの取り扱いとバックアップ</h3>
-    <p>未ログイン時は、Supabaseが未設定の場合を含め、用品データをブラウザのlocalStorageへ保存します。ブラウザデータの消去、端末変更や故障によりデータを利用できなくなる場合があります。</p>
+    <p>ログインしていないときは、クラウド保存サービス（Supabase）が未設定の場合を含め、用品データをブラウザのlocalStorage（この端末のブラウザ保存領域）へ保存します。ブラウザデータの消去、端末変更や故障によりデータを利用できなくなる場合があります。</p>
     <p>ログイン時は用品データをクラウドへ保存しますが、通信障害や外部サービスの障害などにより、一時的に保存・表示できない場合があります。端末内データは自動移行されません。</p>
     <p>重要なデータは、JSONバックアップを利用者自身でも定期的に保存してください。移行操作の前にもJSONバックアップを推奨します。</p>
     <h3>4. Free版とPro版</h3>
@@ -93,7 +93,7 @@ function Contact({ contactFormUrl }: { contactFormUrl: string | null }) {
     <ul>
       <li>不具合報告</li><li>データに関する相談</li><li>アカウント・クラウドデータの削除依頼</li><li>サービスに関する質問</li><li>改善要望</li>
     </ul>
-    <p className="public-info-warning">パスワード、Supabaseのキー、クレジットカード情報などの秘密情報は入力しないでください。削除依頼では、本人確認のため追加の確認をお願いする場合があります。</p>
+    <p className="public-info-warning">パスワード、サービスの設定情報（Supabaseのキーなど）、クレジットカード情報などの秘密情報は入力しないでください。削除依頼では、本人確認のため追加の確認をお願いする場合があります。</p>
     {contactFormUrl
       ? <a className="primary public-info-external" href={contactFormUrl} target="_blank" rel="noopener noreferrer">問い合わせフォームを開く<span aria-hidden="true"> ↗</span></a>
       : <div className="public-info-unavailable" role="status"><strong>問い合わせフォームは準備中です</strong><span>フォーム公開後に、こちらから問い合わせできるようになります。</span></div>}
@@ -108,7 +108,7 @@ function Help() {
       <li><strong>記録を確認・更新する</strong><span>一覧の「詳細」「編集」「削除」から各用品を管理します。削除は元に戻せません。</span></li>
       <li><strong>記録を探す</strong><span>文字検索と並び替えを利用できます。カテゴリー、メーカー、ステータスによる高度な絞り込みはPro機能です。</span></li>
       <li><strong>バックアップを保存する</strong><span>「バックアップ」で全用品のJSONファイルを保存します。端末内保存時の「復元」は現在の端末内記録を置き換えるため、実行前に内容を確認してください。</span></li>
-      <li><strong>クラウド保存を利用する</strong><span>ログイン後に登録・編集した用品はSupabaseへ保存され、同じアカウントで利用できます。</span></li>
+      <li><strong>クラウド保存を利用する</strong><span>ログイン後に登録・編集した用品はクラウド（Supabase）へ保存され、同じアカウントで利用できます。</span></li>
       <li><strong>端末内データを移行する</strong><span>ログインだけでは自動移行されません。移行画面で内容を確認し、明示的に移行操作を行います。</span></li>
       <li><strong>移行前にもバックアップする</strong><span>移行機能は開始前にバックアップを作成しますが、大切なデータは利用者自身でも保管してください。</span></li>
     </ol>
@@ -120,10 +120,10 @@ function Plans() {
     <p className="public-info-lead">日々の記録に必要な基本機能はFree版で利用できます。Pro版は、記録をより詳しく振り返るための機能を提供する予定です。</p>
     <div className="plan-comparison">
       <section><p className="eyebrow">Free</p><h3>基本の記録・管理</h3><ul>
-        <li>用品の登録・編集・削除、基本一覧</li><li>文字検索、並び替え、基本集計</li><li>JSONバックアップ（端末内保存時は復元も利用可能）</li><li>未ログイン時のlocalStorage保存</li>
+        <li>用品の登録・編集・削除、基本一覧</li><li>文字検索、並び替え、基本集計</li><li>JSONバックアップ（端末内保存時は復元も利用可能）</li><li>ログインしないときの、この端末への保存</li>
       </ul></section>
       <section className="pro"><p className="eyebrow">Pro</p><h3>詳しい分析・活用</h3><ul>
-        <li>詳細・年別・月別・カテゴリー別分析</li><li>CSV出力</li><li>カテゴリー・メーカー・ステータスによる高度な絞り込み</li><li>localStorageからSupabaseへのデータ移行</li><li>クラウド保存、複数端末利用</li><li>将来の広告非表示（提供時期未定）</li>
+        <li>詳細・年別・月別・カテゴリー別分析</li><li>CSV出力</li><li>カテゴリー・メーカー・ステータスによる高度な絞り込み</li><li>端末内の保存データからクラウドへのデータ移行</li><li>クラウド保存、複数端末利用</li><li>将来の広告非表示（提供時期未定）</li>
       </ul></section>
     </div>
     <div className="public-info-unavailable"><strong>Pro版の機能は準備中です</strong><span>現在は決済機能を実装していないため、購入することはできません。価格も未確定です。</span></div>

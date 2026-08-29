@@ -7,7 +7,7 @@ const dateTime = (value: string | null | undefined) => value
 export function EquipmentMigrationPanel({ migration }: { migration: EquipmentMigrationState }) {
   if (!migration.signedIn) {
     return migration.configured ? null : <section className="migration-status error" aria-label="クラウド移行の設定">
-      <div><strong>クラウド移行にはSupabase設定が必要です</strong><span>端末内の用品記録機能はこれまでどおり利用でき、データは削除されません。</span></div>
+      <div><strong>クラウドへの移行には接続設定が必要です</strong><span>端末内の用品記録機能はこれまでどおり利用でき、データは削除されません。</span></div>
     </section>;
   }
 

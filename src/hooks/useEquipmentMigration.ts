@@ -79,7 +79,7 @@ export function useEquipmentMigration({ userId, configured, authLoading, allowed
     }
     if (!configured || !cloudRepository) {
       setLoading(false);
-      setError('クラウド移行にはSupabaseの設定が必要です。端末内データはそのまま利用できます。');
+      setError('クラウドへの移行には接続設定が必要です。端末内データはそのまま利用できます。');
       return;
     }
 
@@ -143,7 +143,7 @@ export function useEquipmentMigration({ userId, configured, authLoading, allowed
     setError('');
     setNotice('');
     if (!userId || !configured || !cloudRepository) {
-      setError('ログインとSupabase設定を確認してください。端末内データは変更されていません。');
+      setError('ログインとクラウド保存の設定を確認してください。端末内データは変更されていません。');
       return false;
     }
     if (localItems.length === 0) {
