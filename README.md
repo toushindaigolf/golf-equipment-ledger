@@ -36,6 +36,7 @@ Free版の確認対象は、用品の登録・一覧・詳細・編集・削除�
 ```env
 VITE_SUPABASE_URL=https://your-project.supabase.co
 VITE_SUPABASE_ANON_KEY=your-publishable-or-anon-key
+VITE_CONTACT_FORM_URL=
 ```
 
 `VITE_SUPABASE_ANON_KEY` は既存コードとの互換性のための変数名です。値にはSupabase管理画面で取得したPublishable key（`sb_publishable_...`）を設定できます。Secret keyやService Role keyは設定しないでください。PowerShellでの作成方法、Git除外の確認、ローカル接続確認は [`docs/supabase-local-setup.md`](docs/supabase-local-setup.md) を参照してください。
@@ -46,9 +47,25 @@ Supabase側では次の設定が必要です。
 - 本番運用ではConfirm emailを有効化する
 - Authentication > URL ConfigurationのSite URLに本番URLを設定する
 - Redirect URLsにローカルURL、本番URL、利用するプレビューURLを登録する
-- Cloudflare PagesのProductionとPreviewへ上記2つの環境変数を登録する
+- Cloudflare PagesのProductionとPreviewへSupabase用の上記2つの環境変数を登録する
 
 フロントエンドへ設定するのは公開可能なAnon Key（またはPublishable Key）のみです。Service Role Keyなどの秘密鍵は `.env` やCloudflare Pagesのフロントエンド用変数へ登録しないでください。環境変数が未設定でもアプリは起動し、端末内の用品記録機能はそのまま利用できます。
+
+## 問い合わせフォーム
+
+問い合わせ導線にはGoogleフォームを利用します。フォームを作成したら、ローカルの `.env.local` とCloudflare Pagesの環境変数へ公開URLを設定してください。
+
+```env
+VITE_CONTACT_FORM_URL=https://docs.google.com/forms/d/e/your-form-id/viewform
+```
+
+この値はブラウザへ公開されるURLであり、秘密情報は設定しません。未設定、空欄、または `http` / `https` 以外の値の場合、アプリは壊れたリンクを表示せず「問い合わせフォームは準備中です」と表示します。
+
+## 無料版の公開前確認
+
+利用規約、プライバシーポリシー、問い合わせ、使い方、Free／Pro説明はアプリ下部のフッターから確認できます。運営者情報、制定日、最終更新日、問い合わせ先、管轄裁判所などは未確定のため、画面内に `[要入力]` または `[要確認]` として残しています。
+
+一般公開前に、本人および必要に応じて専門家が内容を確認してください。確認項目は [`docs/free-release-checklist.md`](docs/free-release-checklist.md) にまとめています。現在はStripe決済を実装していないため、アプリからPro版を購入することはできません。
 
 ## GitHub Pages 公開
 

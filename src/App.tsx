@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnalyticsDashboard } from './components/AnalyticsDashboard';
+import { AppFooter } from './components/AppFooter';
 import { AuthPanel } from './components/AuthPanel';
 import { EntitlementStatus } from './components/EntitlementStatus';
 import { EquipmentForm } from './components/EquipmentForm';
@@ -10,6 +11,7 @@ import {
   ProUpgradeDialog,
   type ProFeatureName,
 } from './components/ProFeatureNotice';
+import { PublicInfoDialog, type PublicInfoPage } from './components/PublicInfoDialog';
 import { categories, categoryName } from './data/categories';
 import { manufacturers } from './data/manufacturers';
 import { shaftManufacturers } from './data/shaftManufacturers';
@@ -19,6 +21,7 @@ import { useEntitlement } from './hooks/useEntitlement';
 import { useEquipment } from './hooks/useEquipment';
 import { useEquipmentMigration } from './hooks/useEquipmentMigration';
 import { equipmentToCsv } from './lib/csv';
+import { contactFormUrl } from './lib/contact';
 import { parseEquipmentData } from './lib/equipmentData';
 import { canUseFeature } from './lib/featurePolicy';
 import { date, summary, yen } from './lib/format';
@@ -88,6 +91,7 @@ export default function App() {
   const [formOpen, setFormOpen] = useState(false);
   const [detail, setDetail] = useState<GolfEquipment>();
   const [upgradeFeature, setUpgradeFeature] = useState<ProFeatureName>();
+  const [publicInfoPage, setPublicInfoPage] = useState<PublicInfoPage>();
   const [query, setQuery] = useState('');
   const [appliedQuery, setAppliedQuery] = useState('');
   const [category, setCategory] = useState('');
@@ -280,6 +284,8 @@ export default function App() {
       </>}
     </section>
 
+    <AppFooter onOpen={setPublicInfoPage} />
+
     {formOpen && <EquipmentForm
       item={editing}
       saving={equipment.saving}
@@ -295,5 +301,10 @@ export default function App() {
       onEdit={() => { setEditing(detail); setDetail(undefined); setFormOpen(true); }}
     />}
     {upgradeFeature && <ProUpgradeDialog feature={upgradeFeature} onClose={() => setUpgradeFeature(undefined)} />}
+    {publicInfoPage && <PublicInfoDialog
+      page={publicInfoPage}
+      contactFormUrl={contactFormUrl}
+      onClose={() => setPublicInfoPage(undefined)}
+    />}
   </main>;
 }

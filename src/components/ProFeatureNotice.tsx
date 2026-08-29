@@ -30,7 +30,7 @@ export function ProUpgradeDialog({ feature, onClose }: {
       </div>
       <p>この機能はPro版限定です。</p>
       <p>Pro版では、クラウド保存、複数端末利用、詳細な分析、CSV出力、高度な絞り込みを利用できます。</p>
-      <p className="pro-dialog-note">現在は決済機能を準備中です。アップグレードの受付開始後、この画面から手続きできるようになります。</p>
+      <p className="pro-dialog-note">Pro版の機能は準備中です。現在は決済機能を実装していないため、購入することはできません。価格と受付開始時期も未確定です。</p>
       <div className="form-actions"><button type="button" className="primary" onClick={onClose}>閉じる</button></div>
     </section>
   </div>;

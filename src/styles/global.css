@@ -342,3 +342,52 @@ button:disabled{cursor:not-allowed;opacity:.62}
   .controls.basic-controls{grid-template-columns:1fr 1fr;grid-template-areas:"search search" "pro-filter pro-filter" "search-button search-button";padding:14px}
   .pro-filter-button{width:100%;min-height:44px;white-space:normal}
 }
+
+/* Free release information: reusable footer and long-form guidance dialogs. */
+.app-footer{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:24px;margin-top:34px;padding:24px 4px 0;border-top:1px solid var(--line);color:#68747f}
+.app-footer p{display:grid;gap:4px;margin:0;min-width:0}
+.app-footer p strong{color:var(--navy);font-size:.82rem;font-weight:600}
+.app-footer p span{font-size:.72rem;line-height:1.6}
+.app-footer nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px 14px}
+.app-footer nav button{padding:4px 0;border:0;background:transparent;color:var(--navy);font-size:.74rem;font-weight:500;text-decoration:underline;text-decoration-color:#9aa9b7;text-underline-offset:3px;white-space:nowrap}
+.app-footer nav button:hover{color:var(--terracotta-dark);text-decoration-color:var(--terracotta)}
+.public-info-dialog{width:min(760px,100%)}
+.public-info-content{color:#465362;font-size:.88rem;line-height:1.85;overflow-wrap:anywhere}
+.public-info-content>p,.public-info-content>ul,.public-info-content>ol{margin:0 0 18px}
+.public-info-content h3{margin:26px 0 10px;color:var(--navy);font-size:1rem;font-weight:600}
+.public-info-content ul{padding-left:1.4rem}
+.public-info-content li+li{margin-top:6px}
+.public-info-lead{font-size:.95rem;color:#394754}
+.public-info-placeholders{display:grid;grid-template-columns:1fr 1fr;gap:5px 18px;margin:0 0 22px;padding:14px 16px;background:var(--surface-soft);border:1px solid var(--line-soft);border-radius:9px;color:#68747f;font-size:.78rem}
+.public-info-placeholders p{margin:0}
+.public-info-warning,.public-info-review{padding:12px 14px;background:#fbf2ee;border:1px solid #ecd8cf;border-radius:8px;color:#7b4b3b}
+.public-info-unavailable{display:grid;gap:4px;margin:20px 0;padding:14px 16px;background:var(--surface-soft);border:1px solid var(--line);border-radius:9px}
+.public-info-unavailable strong{color:var(--navy);font-size:.9rem;font-weight:600}
+.public-info-unavailable span{color:#68747f;font-size:.8rem}
+.public-info-external{display:inline-flex;align-items:center;justify-content:center;min-height:46px;margin-top:4px;text-decoration:none}
+.public-info-steps{display:grid;gap:10px;padding:0;list-style:none;counter-reset:help-step}
+.public-info-steps li{display:grid;grid-template-columns:32px minmax(0,1fr);gap:2px 10px;padding:14px;background:var(--surface-soft);border:1px solid var(--line-soft);border-radius:9px;counter-increment:help-step}
+.public-info-steps li::before{grid-row:1/3;display:grid;place-items:center;width:28px;height:28px;background:var(--navy);border-radius:50%;color:#fff;content:counter(help-step);font-size:.75rem;font-weight:600}
+.public-info-steps strong{color:var(--navy);font-weight:600}
+.public-info-steps span{font-size:.82rem}
+.plan-comparison{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.plan-comparison>section{padding:18px;background:var(--surface-soft);border:1px solid var(--line);border-radius:10px}
+.plan-comparison>section.pro{border-top:3px solid var(--terracotta)}
+.plan-comparison h3{margin:3px 0 12px}
+.plan-comparison ul{margin:0;padding-left:1.2rem;font-size:.82rem}
+.public-info-close{position:sticky;bottom:-26px;display:flex;justify-content:flex-end;margin:24px -2px -2px;padding:14px 2px 2px;background:#fff}
+.public-info-close button{min-width:110px;min-height:44px}
+
+@media(max-width:760px){
+  .app-footer{grid-template-columns:1fr;align-items:start;gap:16px;margin-top:26px;padding-top:20px;text-align:center}
+  .app-footer nav{justify-content:center;gap:8px 16px}
+  .app-footer nav button{min-height:36px;font-size:.76rem}
+  .public-info-dialog{width:100%;max-width:100%;padding:22px 18px}
+  .public-info-dialog .panel-head{margin-bottom:18px}
+  .public-info-content{font-size:.84rem;line-height:1.8}
+  .public-info-placeholders{grid-template-columns:1fr}
+  .plan-comparison{grid-template-columns:1fr}
+  .public-info-external{width:100%;min-height:48px}
+  .public-info-close{bottom:-22px;margin-inline:0}
+  .public-info-close button{width:100%;min-height:48px}
+}
