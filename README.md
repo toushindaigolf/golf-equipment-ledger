@@ -67,4 +67,4 @@ GitHubリポジトリを接続し、以下の値を設定してください。
 
 保存処理はRepository層に集約し、認証状態に応じてlocalStorage用とSupabase用を切り替えます。UIコンポーネントから保存先を直接操作しません。売却価格は、ステータスにかかわらず入力されている金額を売却総額に反映します。未売却は0円です。売却日は任意項目で、旧データや旧バックアップに項目がない場合は空欄として安全に読み込みます。年別分析では購入を購入日、売却件数と売却額を売却日で集計し、売却日が空欄の記録は年間売却集計から除外します。
 
-ローカルのSupabase接続設定は [`docs/supabase-local-setup.md`](docs/supabase-local-setup.md)、Phase 3-1のSupabaseテーブル、RLS、適用方法は [`docs/supabase-phase-3-1.md`](docs/supabase-phase-3-1.md)、Phase 3-2の保存先切り替えは [`docs/supabase-phase-3-2.md`](docs/supabase-phase-3-2.md)、Phase 3-3の明示的な端末データ移行は [`docs/supabase-phase-3-3.md`](docs/supabase-phase-3-3.md) を参照してください。
+ローカルのSupabase接続設定は [`docs/supabase-local-setup.md`](docs/supabase-local-setup.md)、Phase 3-1のSupabaseテーブル、RLS、適用方法は [`docs/supabase-phase-3-1.md`](docs/supabase-phase-3-1.md)、Phase 3-2の保存先切り替えは [`docs/supabase-phase-3-2.md`](docs/supabase-phase-3-2.md)、Phase 3-3の明示的な端末データ移行は [`docs/supabase-phase-3-3.md`](docs/supabase-phase-3-3.md)、Phase 4のFree／Pro権限と手動付与方法は [`docs/supabase-phase-4.md`](docs/supabase-phase-4.md) を参照してください。

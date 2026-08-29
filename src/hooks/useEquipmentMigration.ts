@@ -25,6 +25,7 @@ type UseEquipmentMigrationOptions = {
   userId?: string;
   configured: boolean;
   authLoading: boolean;
+  allowed: boolean;
   onMigrated: () => void;
 };
 
@@ -41,7 +42,7 @@ const messageOf = (caught: unknown) => caught instanceof Error
   ? caught.message
   : 'データ移行の処理に失敗しました。端末内データは保持されています。';
 
-export function useEquipmentMigration({ userId, configured, authLoading, onMigrated }: UseEquipmentMigrationOptions) {
+export function useEquipmentMigration({ userId, configured, authLoading, allowed, onMigrated }: UseEquipmentMigrationOptions) {
   const requestId = useRef(0);
   const inspectedUser = useRef(userId);
   const stateRepository = useMemo(() => createEquipmentMigrationStateRepository(localStorage), []);
@@ -67,7 +68,7 @@ export function useEquipmentMigration({ userId, configured, authLoading, onMigra
       setLoading(true);
       return;
     }
-    if (!userId) {
+    if (!userId || !allowed) {
       setLoading(false);
       setLocalItems([]);
       setCloudItems([]);
@@ -96,7 +97,7 @@ export function useEquipmentMigration({ userId, configured, authLoading, onMigra
     } finally {
       if (requestId.current === activeRequest) setLoading(false);
     }
-  }, [authLoading, cloudRepository, configured, stateRepository, userId]);
+  }, [allowed, authLoading, cloudRepository, configured, stateRepository, userId]);
 
   useEffect(() => {
     if (inspectedUser.current !== userId) {

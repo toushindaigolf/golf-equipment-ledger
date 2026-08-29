@@ -3,6 +3,39 @@ import type { EquipmentStatus } from './equipment';
 export type Database = {
   public: {
     Tables: {
+      entitlements: {
+        Row: {
+          id: string;
+          user_id: string;
+          plan: 'free' | 'pro';
+          status: 'active' | 'inactive' | 'canceled' | 'expired';
+          source: 'manual' | 'stripe' | 'other';
+          expires_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          plan?: 'free' | 'pro';
+          status?: 'active' | 'inactive' | 'canceled' | 'expired';
+          source?: 'manual' | 'stripe' | 'other';
+          expires_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          plan?: 'free' | 'pro';
+          status?: 'active' | 'inactive' | 'canceled' | 'expired';
+          source?: 'manual' | 'stripe' | 'other';
+          expires_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
       equipment: {
         Row: {
           id: string;
