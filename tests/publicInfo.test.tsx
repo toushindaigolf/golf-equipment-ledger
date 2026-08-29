@@ -44,7 +44,7 @@ describe('public release information', () => {
   it('explains help and the current Free/Pro transition without offering payment', () => {
     const help = renderPage('help');
     const plans = renderPage('plans');
-    expect(help).toContain('移行前にもバックアップする');
+    expect(help).toContain('移行前にもデータを保存する');
     expect(plans).toContain('現在は決済機能を実装していないため、購入することはできません');
     expect(plans).toContain('ログイン済みのFreeユーザーもクラウド保存を利用できます');
   });

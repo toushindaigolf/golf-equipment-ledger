@@ -24,7 +24,7 @@ export const readLocalMigrationItems = (storage: ReadableStorage): GolfEquipment
   try {
     const parsed = parseEquipmentData(JSON.parse(raw));
     if (!parsed.ok) {
-      throw new LocalMigrationDataError('端末内データの形式を確認できないため、移行を開始できません。JSONバックアップを確認してください。');
+      throw new LocalMigrationDataError('端末内データの形式を確認できないため、移行を開始できません。保存したデータファイルを確認してください。');
     }
     return migratableEquipment(parsed.items);
   } catch (caught) {

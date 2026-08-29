@@ -115,7 +115,7 @@ export function useEquipmentMigration({ userId, configured, authLoading, allowed
   }, [inspect, userId]);
 
   const downloadBackup = useCallback(async () => {
-    if (localItems.length === 0) throw new Error('バックアップする端末内データはありません。');
+    if (localItems.length === 0) throw new Error('保存する端末内データはありません。');
     const createdAt = new Date().toISOString();
     const backup = createMigrationBackup(localItems, createdAt);
     downloadMigrationBackup(JSON.stringify(backup, null, 2), migrationBackupFilename(createdAt));
@@ -131,7 +131,7 @@ export function useEquipmentMigration({ userId, configured, authLoading, allowed
     setError('');
     try {
       await downloadBackup();
-      setNotice('端末内データのJSONバックアップを作成しました。');
+      setNotice('端末内データを保存したファイルを作成しました。');
       return true;
     } catch (caught) {
       setError(`${messageOf(caught)} 移行は開始されていません。`);

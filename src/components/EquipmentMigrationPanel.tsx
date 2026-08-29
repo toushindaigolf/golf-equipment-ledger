@@ -14,7 +14,7 @@ export function EquipmentMigrationPanel({ migration }: { migration: EquipmentMig
   const { preview, progress } = migration;
   const startMigration = () => {
     if (preview.cloudCount === 0) {
-      if (confirm(`端末内の${preview.localCount}件をクラウドへ移行します。\n移行前にJSONバックアップを自動作成し、端末内データは移行後も保持します。`)) {
+      if (confirm(`端末内の${preview.localCount}件をクラウドへ移行します。\n移行前に保存データファイルを自動作成し、端末内データは移行後も保持します。`)) {
         void migration.migrate('append');
       }
       return;
@@ -23,7 +23,7 @@ export function EquipmentMigrationPanel({ migration }: { migration: EquipmentMig
   };
   const useLocalPriority = () => {
     const effect = `端末内${preview.localCount}件のうち、追加${preview.addCount}件・更新候補${preview.updateCount}件を処理します。\n既存クラウド${preview.cloudCount}件は削除しません。同じ移行元IDの${preview.updateCount}件だけ端末内データで更新します。`;
-    if (confirm(`${effect}\n\n移行前バックアップを作成して続行しますか？`)) {
+    if (confirm(`${effect}\n\n移行前に保存データファイルを作成して続行しますか？`)) {
       void migration.migrate('local_priority');
     }
   };
@@ -43,7 +43,7 @@ export function EquipmentMigrationPanel({ migration }: { migration: EquipmentMig
         {migration.error && <small className="migration-error" role="alert">{migration.error}</small>}
       </div>
       {!migration.loading && preview.localCount > 0 && <div className="migration-actions">
-        <button type="button" className="secondary" disabled={migration.migrating} onClick={() => void migration.backupNow()}>JSONバックアップ</button>
+        <button type="button" className="secondary" disabled={migration.migrating} onClick={() => void migration.backupNow()}>データを保存</button>
         {!migration.effectivelyCompleted && <button type="button" className="primary" disabled={migration.migrating} onClick={startMigration}>クラウドへ移行する</button>}
         {!migration.effectivelyCompleted && <button type="button" className="text-button" disabled={migration.migrating} onClick={() => migration.defer(false)}>あとで</button>}
         <button type="button" className="text-button" disabled={migration.migrating} onClick={migration.openDialog}>移行について確認する</button>
@@ -53,7 +53,7 @@ export function EquipmentMigrationPanel({ migration }: { migration: EquipmentMig
     {migration.dialogOpen && <div className="overlay" role="presentation" onMouseDown={event => { if (event.target === event.currentTarget) migration.cancel(); }}>
       <section className="panel migration-dialog" role="dialog" aria-modal="true" aria-label="端末データのクラウド移行">
         <div className="panel-head"><div><p className="eyebrow">データ移行</p><h2>端末内データをクラウドへ移行</h2></div><button type="button" className="icon-button" disabled={migration.migrating} onClick={migration.cancel} aria-label="閉じる">×</button></div>
-        <p>移行すると、ログインした端末から同じ用品記録を利用できます。開始前にJSONバックアップを自動作成し、完了後も端末内データは削除しません。</p>
+        <p>移行すると、ログインした端末から同じ用品記録を利用できます。開始前に保存データファイルを自動作成し、完了後も端末内データは削除しません。</p>
         <dl className="migration-counts">
           <div><dt>端末内</dt><dd>{preview.localCount}件</dd></div>
           <div><dt>クラウド</dt><dd>{preview.cloudCount}件</dd></div>
@@ -70,7 +70,7 @@ export function EquipmentMigrationPanel({ migration }: { migration: EquipmentMig
         {migration.notice && <p className="auth-message notice" role="status">{migration.notice}</p>}
         {migration.error && <p className="auth-message error" role="alert">{migration.error}</p>}
         <div className="migration-dialog-actions">
-          <button type="button" className="secondary" disabled={migration.migrating || preview.localCount === 0} onClick={() => void migration.backupNow()}>JSONバックアップをダウンロード</button>
+          <button type="button" className="secondary" disabled={migration.migrating || preview.localCount === 0} onClick={() => void migration.backupNow()}>保存データをダウンロード</button>
           {preview.cloudCount === 0 && preview.localCount > 0 && <button type="button" className="primary" disabled={migration.migrating} onClick={startMigration}>クラウドへ移行する</button>}
           {preview.cloudCount > 0 && preview.localCount > 0 && <>
             <button type="button" className="primary" disabled={migration.migrating} onClick={useLocalPriority}>端末内データを優先</button>

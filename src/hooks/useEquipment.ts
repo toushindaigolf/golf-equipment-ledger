@@ -115,7 +115,7 @@ export function useEquipment({ userId, authLoading }: UseEquipmentOptions) {
 
   const restore = async (data: GolfEquipment[]) => {
     if (!repository.restore) {
-      setError('ログイン中のJSON復元は、データ移行機能を実装するPhaseまで利用できません。端末内データは変更されていません。');
+      setError('ログイン中の保存データの読み込みは、データ移行機能を実装するPhaseまで利用できません。端末内データは変更されていません。');
       return false;
     }
     if (!canMutate()) return false;

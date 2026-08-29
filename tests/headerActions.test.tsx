@@ -14,8 +14,8 @@ describe('HeaderActions', () => {
     />);
 
     expect(html).toContain('＋ 新規登録');
-    expect(html).toContain('バックアップ');
-    expect(html).toContain('復元');
+    expect(html).toContain('データを保存');
+    expect(html).toContain('保存データを読み込む');
     expect(html).toContain('CSV出力');
     expect(html).toContain('aria-label="データ操作メニュー"');
     expect(html).toContain('aria-expanded="false"');

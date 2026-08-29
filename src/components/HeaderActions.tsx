@@ -52,8 +52,8 @@ export function HeaderActions({
 
   return <div className="header-actions">
     <div className="desktop-data-actions" aria-label="データ操作">
-      <button className="text-button" type="button" onClick={onBackup}>バックアップ</button>
-      <button className="text-button" type="button" onClick={() => fileRef.current?.click()}>復元</button>
+      <button className="text-button" type="button" onClick={onBackup}>データを保存</button>
+      <button className="text-button" type="button" onClick={() => fileRef.current?.click()}>保存データを読み込む</button>
       <button className={`text-button${csvLocked ? ' pro-locked' : ''}`} type="button" onClick={onCsv}>CSV出力</button>
     </div>
 
@@ -72,8 +72,8 @@ export function HeaderActions({
       </button>
       {menuOpen && <div className="data-menu-popover" id="mobile-data-menu-popover" role="menu">
         <p>データ操作</p>
-        <button type="button" role="menuitem" onClick={backup}>バックアップ</button>
-        <button type="button" role="menuitem" onClick={restore}>復元</button>
+        <button type="button" role="menuitem" onClick={backup}>データを保存</button>
+        <button type="button" role="menuitem" onClick={restore}>保存データを読み込む</button>
         <button type="button" role="menuitem" className={csvLocked ? 'pro-locked' : ''} onClick={csv}>
           CSV出力{csvLocked && <span>Pro</span>}
         </button>

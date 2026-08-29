@@ -160,7 +160,7 @@ export default function App() {
           await restore(parsed.items);
         }
       } catch {
-        alert('有効なバックアップJSONを選択してください。データ形式と必須項目を確認してください。');
+        alert('有効な保存データファイルを選択してください。ファイル形式と必須項目を確認してください。');
       }
     };
     reader.readAsText(file);
