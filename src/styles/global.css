@@ -113,17 +113,27 @@ input,select,textarea{font-weight:400;letter-spacing:.01em}
   .form-grid input[type="date"]{-webkit-appearance:none;appearance:none;display:block;width:100%;min-width:0;max-width:100%}
 }
 
-/* Mobile header actions: feature the primary action, then place utilities side by side. */
+/* Mobile header actions: keep registration visible and move data utilities into a compact menu. */
+.desktop-data-actions{display:flex;align-items:center;gap:10px}
+.mobile-data-menu{display:none}
 @media(max-width:760px){
-  header{display:flex;flex-direction:column;align-items:stretch;gap:16px;min-height:0}
+  header{display:flex;flex-direction:column;align-items:stretch;gap:12px;min-height:0;margin-bottom:20px}
   header h1{font-size:clamp(1.45rem,7.1vw,1.65rem);line-height:1.2;letter-spacing:.01em;white-space:nowrap;max-width:100%}
   .mobile-title-break{display:none}
-  .header-actions{position:static;width:100%;max-width:none;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"add add" "backup restore" "csv csv";gap:8px}
-  .header-actions .add{grid-area:add;width:100%;min-height:48px;padding:12px 14px;white-space:nowrap}
-  .header-actions .text-button{width:100%;min-height:44px;padding:10px 8px;white-space:nowrap}
-  .header-actions .text-button:first-of-type{grid-area:backup}
-  .header-actions .text-button:nth-of-type(2){grid-area:restore}
-  .header-actions .text-button:nth-of-type(3){grid-area:csv}
+  .header-actions{position:static;width:100%;max-width:none;display:grid;grid-template-columns:minmax(0,1fr) 48px;gap:8px}
+  .desktop-data-actions{display:none}
+  .header-actions .add{width:100%;min-height:48px;padding:12px 14px;white-space:nowrap}
+  .mobile-data-menu{position:relative;display:block}
+  .data-menu-trigger{display:grid;align-content:center;justify-items:center;gap:4px;width:48px;height:48px;padding:0;border:1px solid var(--navy);border-radius:8px;background:#fff;color:var(--navy)}
+  .data-menu-trigger span{display:block;width:20px;height:2px;background:currentColor;border-radius:99px}
+  .data-menu-trigger[aria-expanded="true"]{background:var(--surface-soft)}
+  .data-menu-popover{position:absolute;z-index:4;top:calc(100% + 8px);right:0;width:min(230px,calc(100vw - 32px));padding:7px;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 28px #1d2d4024}
+  .data-menu-popover p{margin:3px 8px 5px;color:#68747f;font-size:.68rem;font-weight:500;letter-spacing:.08em}
+  .data-menu-popover button{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:44px;padding:10px 11px;border:0;border-radius:7px;background:transparent;color:var(--navy);font-size:.84rem;font-weight:600;text-align:left}
+  .data-menu-popover button:hover,.data-menu-popover button:focus-visible{background:var(--surface-soft)}
+  .data-menu-popover button+button{border-top:1px solid var(--line-soft);border-radius:0}
+  .data-menu-popover button.pro-locked{color:var(--terracotta-dark)}
+  .data-menu-popover button span{padding:2px 6px;background:#f2e4de;border-radius:999px;color:var(--terracotta-dark);font-size:.64rem}
 }
 
 /* Mobile results: keep the outer list container, but separate each item into a card. */

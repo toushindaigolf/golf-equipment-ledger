@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { AnalyticsDashboard } from './components/AnalyticsDashboard';
 import { AppFooter } from './components/AppFooter';
 import { AuthPanel } from './components/AuthPanel';
@@ -6,6 +6,7 @@ import { EntitlementStatus } from './components/EntitlementStatus';
 import { EquipmentForm } from './components/EquipmentForm';
 import { EquipmentMigrationPanel } from './components/EquipmentMigrationPanel';
 import { EquipmentStorageStatus } from './components/EquipmentStorageStatus';
+import { HeaderActions } from './components/HeaderActions';
 import {
   ProFeatureNotice,
   ProUpgradeDialog,
@@ -98,7 +99,6 @@ export default function App() {
   const [manufacturer, setManufacturer] = useState('');
   const [status, setStatus] = useState('');
   const [sort, setSort] = useState<SortOption>('newest');
-  const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (canFilter) return;
@@ -161,8 +161,6 @@ export default function App() {
         }
       } catch {
         alert('有効なバックアップJSONを選択してください。データ形式と必須項目を確認してください。');
-      } finally {
-        if (fileRef.current) fileRef.current.value = '';
       }
     };
     reader.readAsText(file);
@@ -179,13 +177,14 @@ export default function App() {
   return <main>
     <header>
       <div><p className="brand">等身大ゴルフ</p><h1>ゴルフ用品<span className="mobile-title-break"><br /></span>購入記録</h1></div>
-      <div className="header-actions">
-        <button className="text-button" onClick={exportJson}>バックアップ</button>
-        <button className="text-button" onClick={() => fileRef.current?.click()}>復元</button>
-        <button className={`text-button${canExportCsv ? '' : ' pro-locked'}`} onClick={exportCsv}>CSV出力</button>
-        <input ref={fileRef} className="sr-only" type="file" accept="application/json" onChange={event => importJson(event.target.files?.[0])} />
-        <button className="primary add" disabled={!equipment.ready || equipment.saving} onClick={() => { setEditing(undefined); setFormOpen(true); }}>＋ 新規登録</button>
-      </div>
+      <HeaderActions
+        addDisabled={!equipment.ready || equipment.saving}
+        csvLocked={!canExportCsv}
+        onBackup={exportJson}
+        onCsv={exportCsv}
+        onRestore={importJson}
+        onAdd={() => { setEditing(undefined); setFormOpen(true); }}
+      />
     </header>
 
     <AuthPanel auth={auth} />
