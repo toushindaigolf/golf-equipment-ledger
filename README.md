@@ -38,6 +38,8 @@ VITE_SUPABASE_URL=https://your-project.supabase.co
 VITE_SUPABASE_ANON_KEY=your-publishable-or-anon-key
 ```
 
+`VITE_SUPABASE_ANON_KEY` は既存コードとの互換性のための変数名です。値にはSupabase管理画面で取得したPublishable key（`sb_publishable_...`）を設定できます。Secret keyやService Role keyは設定しないでください。PowerShellでの作成方法、Git除外の確認、ローカル接続確認は [`docs/supabase-local-setup.md`](docs/supabase-local-setup.md) を参照してください。
+
 Supabase側では次の設定が必要です。
 
 - Authentication > ProvidersでEmailを有効化する
@@ -65,4 +67,4 @@ GitHubリポジトリを接続し、以下の値を設定してください。
 
 保存処理はRepository層に集約し、認証状態に応じてlocalStorage用とSupabase用を切り替えます。UIコンポーネントから保存先を直接操作しません。売却価格は、ステータスにかかわらず入力されている金額を売却総額に反映します。未売却は0円です。売却日は任意項目で、旧データや旧バックアップに項目がない場合は空欄として安全に読み込みます。年別分析では購入を購入日、売却件数と売却額を売却日で集計し、売却日が空欄の記録は年間売却集計から除外します。
 
-Phase 3-1のSupabaseテーブル、RLS、適用方法は [`docs/supabase-phase-3-1.md`](docs/supabase-phase-3-1.md)、Phase 3-2の保存先切り替えと確認事項は [`docs/supabase-phase-3-2.md`](docs/supabase-phase-3-2.md) を参照してください。
+ローカルのSupabase接続設定は [`docs/supabase-local-setup.md`](docs/supabase-local-setup.md)、Phase 3-1のSupabaseテーブル、RLS、適用方法は [`docs/supabase-phase-3-1.md`](docs/supabase-phase-3-1.md)、Phase 3-2の保存先切り替えは [`docs/supabase-phase-3-2.md`](docs/supabase-phase-3-2.md)、Phase 3-3の明示的な端末データ移行は [`docs/supabase-phase-3-3.md`](docs/supabase-phase-3-3.md) を参照してください。

@@ -257,3 +257,43 @@ button:disabled{cursor:not-allowed;opacity:.62}
   .storage-status.error{align-items:stretch;flex-direction:column}
   .storage-status.error .secondary{width:100%;min-height:44px}
 }
+
+/* Phase 3-3: explicit, recoverable local-to-cloud migration. */
+.migration-status{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:-18px 0 28px;padding:14px;background:#f7f8fa;border:1px solid var(--line);border-radius:10px;color:#52606d}
+.migration-status>div:first-child{display:grid;gap:3px;min-width:0}
+.migration-status strong{color:var(--navy);font-size:.84rem;font-weight:600}
+.migration-status span,.migration-status small{font-size:.74rem;line-height:1.55}
+.migration-status.error{background:#f8ebe6;border-color:#ebd3ca}
+.migration-notice{color:#416555}
+.migration-error{color:var(--terracotta-dark)}
+.migration-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex:0 0 auto}
+.migration-actions button{min-height:40px;padding:8px 12px;white-space:nowrap}
+.migration-dialog{width:min(660px,100%)}
+.migration-dialog>p{margin:0 0 18px;color:#52606d;font-size:.84rem;line-height:1.75}
+.migration-counts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 18px}
+.migration-counts>div{padding:12px;background:var(--surface-soft);border:1px solid var(--line-soft);border-radius:8px}
+.migration-counts dt{margin-bottom:4px;color:#68747f;font-size:.7rem;font-weight:500}
+.migration-counts dd{margin:0;color:var(--navy);font-size:1rem;font-weight:700;font-variant-numeric:tabular-nums}
+.migration-warning{padding:11px 12px;background:#fbf2ee;border:1px solid #ecd8cf;border-radius:8px;color:#7b4b3b!important}
+.migration-progress{display:grid;gap:7px;margin:0 0 18px;color:#52606d;font-size:.76rem}
+.migration-progress progress{width:100%;height:8px;accent-color:var(--navy)}
+.migration-dialog-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:9px;margin-top:20px}
+.migration-dialog-actions button{min-height:44px;white-space:nowrap}
+
+@media(max-width:760px){
+  .migration-status{align-items:stretch;flex-direction:column;margin:-12px 0 22px;padding:13px;gap:12px}
+  .migration-actions{display:grid;grid-template-columns:1fr 1fr;width:100%}
+  .migration-actions .primary{grid-column:1/-1;grid-row:1}
+  .migration-actions button{width:100%;min-height:44px}
+  .migration-dialog{width:100%;max-width:100%;padding:22px 18px}
+  .migration-counts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .migration-dialog-actions{display:grid;grid-template-columns:1fr}
+  .migration-dialog-actions button{width:100%;white-space:normal}
+}
+
+/* Keep the existing desktop table usable at the 768px verification width. */
+.desktop-table{overflow-x:auto}
+@media(min-width:761px) and (max-width:768px){
+  .controls{grid-template-columns:1fr 1fr;grid-template-areas:"category status" "manufacturer manufacturer" "search search" "search-button search-button";padding:14px}
+  .controls .search-button{width:max-content;min-width:120px;justify-self:center}
+}
