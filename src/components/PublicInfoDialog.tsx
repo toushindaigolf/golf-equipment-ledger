@@ -117,13 +117,18 @@ function Help() {
 
 function Plans() {
   return <>
-    <p className="public-info-lead">日々の記録に必要な基本機能はFree版で利用できます。Pro版は、記録をより詳しく振り返るための機能を提供する予定です。</p>
+    <p className="public-info-lead">日々の記録に必要な基本機能はFree版で利用できます。Pro版では、用品が増えても「振り返る・整理する・持ち歩く」をスムーズにする機能をまとめて利用できます。</p>
     <div className="plan-comparison">
       <section><p className="eyebrow">Free</p><h3>基本の記録・管理</h3><ul>
         <li>用品の登録・編集・削除、基本一覧</li><li>文字検索、並び替え、基本集計</li><li>データの保存・読み込み（端末内保存時）</li><li>ログインしないときの、この端末への保存</li>
       </ul></section>
-      <section className="pro"><p className="eyebrow">Pro</p><h3>詳しい分析・活用</h3><ul>
-        <li>詳細・年別・月別・カテゴリー別分析</li><li>CSV出力</li><li>カテゴリー・メーカー・ステータスによる高度な絞り込み</li><li>端末内の保存データからクラウドへのデータ移行</li><li>クラウド保存、複数端末利用</li><li>将来の広告非表示（提供時期未定）</li>
+      <section className="pro"><p className="eyebrow">Pro</p><h3>詳しい分析・活用</h3><ul className="pro-benefit-list">
+        <li><strong>購入の傾向を見える化</strong><span>年別・月別・カテゴリー別に購入額や売却額を確認し、用品選びや買い替えを振り返れます。</span></li>
+        <li><strong>必要な記録をすぐに発見</strong><span>カテゴリー・メーカー・ステータスを組み合わせて絞り込み。用品が増えても探す時間を減らせます。</span></li>
+        <li><strong>データを自由に活用</strong><span>全用品をCSVで書き出し、表計算ソフトで集計・保管できます。</span></li>
+        <li><strong>端末が変わっても続きから</strong><span>クラウド保存と複数端末利用に対応。PCとスマートフォンで同じ記録を確認できます。</span></li>
+        <li><strong>端末内の記録も安全に移行</strong><span>これまでの保存データを確認しながら、クラウドへ移してまとめて管理できます。</span></li>
+        <li><strong>広告表示の軽減</strong><span>将来提供予定の機能です。提供時期や内容は決まり次第ご案内します。</span></li>
       </ul></section>
     </div>
     <div className="public-info-unavailable"><strong>Pro版の機能は準備中です</strong><span>現在は決済機能を実装していないため、購入することはできません。価格も未確定です。</span></div>

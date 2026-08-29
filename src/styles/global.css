@@ -385,6 +385,11 @@ button:disabled{cursor:not-allowed;opacity:.62}
 .plan-comparison>section.pro{border-top:3px solid var(--terracotta)}
 .plan-comparison h3{margin:3px 0 12px}
 .plan-comparison ul{margin:0;padding-left:1.2rem;font-size:.82rem}
+.pro-benefit-list{display:grid;gap:9px;margin:0 0 14px;padding:0;list-style:none}
+.pro-benefit-list li{display:grid;gap:2px;padding:10px 12px;background:#fff;border:1px solid var(--line-soft);border-radius:8px}
+.pro-benefit-list strong{color:var(--navy);font-size:.83rem;font-weight:600}
+.pro-benefit-list span{color:#68747f;font-size:.77rem;line-height:1.55}
+.plan-comparison .pro-benefit-list{padding-left:0;font-size:inherit}
 .public-info-close{position:sticky;bottom:-26px;display:flex;justify-content:flex-end;margin:24px -2px -2px;padding:14px 2px 2px;background:#fff}
 .public-info-close button{min-width:110px;min-height:44px}
 

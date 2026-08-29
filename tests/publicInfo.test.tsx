@@ -45,6 +45,8 @@ describe('public release information', () => {
     const help = renderPage('help');
     const plans = renderPage('plans');
     expect(help).toContain('移行前にもデータを保存する');
+    expect(plans).toContain('購入の傾向を見える化');
+    expect(plans).toContain('必要な記録をすぐに発見');
     expect(plans).toContain('現在は決済機能を実装していないため、購入することはできません');
     expect(plans).toContain('ログイン済みのFreeユーザーもクラウド保存を利用できます');
   });
