@@ -176,7 +176,7 @@ export default function App() {
 
   return <main>
     <header>
-      <div><p className="brand">等身大ゴルフ</p><h1>ゴルフ用品<span className="mobile-title-break"><br /></span>購入記録</h1></div>
+      <div><p className="brand"><a href="https://note.com/toushindai_golf" target="_blank" rel="noopener noreferrer">等身大ゴルフ</a></p><h1>ゴルフ用品<span className="mobile-title-break"><br /></span>購入記録</h1></div>
       <HeaderActions
         addDisabled={!equipment.ready || equipment.saving}
         csvLocked={!canExportCsv}

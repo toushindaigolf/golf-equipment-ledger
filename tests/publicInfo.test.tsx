@@ -15,6 +15,8 @@ describe('public release information', () => {
     expect(html).toContain('利用規約');
     expect(html).toContain('問い合わせ');
     expect(html).toContain('Free／Proについて');
+    expect(html).toContain('href="https://note.com/toushindai_golf"');
+    expect(html).toContain('rel="noopener noreferrer"');
   });
 
   it('renders privacy and terms without inventing operator details', () => {
