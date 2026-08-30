@@ -9,6 +9,7 @@ describe('HeaderActions', () => {
       csvLocked
       onAdd={() => undefined}
       onBackup={() => undefined}
+      onContact={() => undefined}
       onCsv={() => undefined}
       onRestore={() => undefined}
     />);

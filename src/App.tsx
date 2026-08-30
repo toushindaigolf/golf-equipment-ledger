@@ -3,6 +3,7 @@ import { AnalyticsDashboard } from './components/AnalyticsDashboard';
 import { AppFooter } from './components/AppFooter';
 import { AuthPanel } from './components/AuthPanel';
 import { EntitlementStatus } from './components/EntitlementStatus';
+import { EnvironmentBanner } from './components/EnvironmentBanner';
 import { EquipmentForm } from './components/EquipmentForm';
 import { EquipmentMigrationPanel } from './components/EquipmentMigrationPanel';
 import { EquipmentStorageStatus } from './components/EquipmentStorageStatus';
@@ -22,6 +23,7 @@ import { useEntitlement } from './hooks/useEntitlement';
 import { useEquipment } from './hooks/useEquipment';
 import { useEquipmentMigration } from './hooks/useEquipmentMigration';
 import { equipmentToCsv } from './lib/csv';
+import { appEnvironment } from './lib/appEnvironment';
 import { contactFormUrl } from './lib/contact';
 import { parseEquipmentData } from './lib/equipmentData';
 import { canUseFeature } from './lib/featurePolicy';
@@ -174,7 +176,9 @@ export default function App() {
     .map(name => <option value={name} key={name}>{name}</option>)}</>;
   const sortOptions = <>{Object.entries(sortLabels).map(([id, name]) => <option value={id} key={id}>{name}</option>)}</>;
 
-  return <main>
+  return <>
+    <EnvironmentBanner environment={appEnvironment} />
+    <main>
     <header>
       <div><p className="brand"><a href="https://note.com/toushindai_golf" target="_blank" rel="noopener noreferrer">等身大ゴルフ</a></p><h1>ゴルフ用品<span className="mobile-title-break"><br /></span>購入記録</h1></div>
       <HeaderActions
@@ -306,5 +310,6 @@ export default function App() {
       contactFormUrl={contactFormUrl}
       onClose={() => setPublicInfoPage(undefined)}
     />}
-  </main>;
+    </main>
+  </>;
 }

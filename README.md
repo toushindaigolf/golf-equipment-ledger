@@ -61,6 +61,23 @@ VITE_CONTACT_FORM_URL=https://docs.google.com/forms/d/e/your-form-id/viewform
 
 この値はブラウザへ公開されるURLであり、秘密情報は設定しません。未設定、空欄、または `http` / `https` 以外の値の場合、アプリは壊れたリンクを表示せず「問い合わせフォームは準備中です」と表示します。
 
+## 本番・ステージング環境
+
+本番は`main`ブランチとCloudflare Pages Production、ステージングは`staging`ブランチとCloudflare Pages Previewを使用します。ステージングでは、本番とは別のSupabaseプロジェクト、テストユーザー、テストデータ、問い合わせ先を使用してください。
+
+```env
+VITE_APP_ENV=local
+VITE_SUPABASE_URL=
+VITE_SUPABASE_ANON_KEY=
+VITE_CONTACT_FORM_URL=
+```
+
+Preview環境では`VITE_APP_ENV=staging`を設定すると、画面上部に`STAGING｜テスト環境`が表示されます。Productionでは`VITE_APP_ENV=production`を設定し、本番の既存Supabase環境変数を変更しないでください。
+
+セットアップ手順は [`docs/staging-environment-setup.md`](docs/staging-environment-setup.md)、環境の違いは [`docs/environment-matrix.md`](docs/environment-matrix.md)、検証項目は [`docs/staging-test-checklist.md`](docs/staging-test-checklist.md) を参照してください。Stripeはまだ実装せず、将来はステージングをStripe Test Modeの検証先として使用します。
+
+`.env`、`.env.local`、`.env.production`などはGit管理対象外です。Publishable key以外の秘密鍵をフロントエンドへ設定しないでください。
+
 ## 無料版の公開前確認
 
 利用規約、プライバシーポリシー、問い合わせ、データ削除について、使い方、Free／Pro説明はアプリ下部のフッターから確認できます。公開情報の内容、データ削除の案内、未実装の決済機能については [`docs/free-release-information.md`](docs/free-release-information.md) に整理しています。
