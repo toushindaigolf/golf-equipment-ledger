@@ -181,6 +181,7 @@ export default function App() {
         addDisabled={!equipment.ready || equipment.saving}
         csvLocked={!canExportCsv}
         onBackup={exportJson}
+        onContact={() => setPublicInfoPage('contact')}
         onCsv={exportCsv}
         onRestore={importJson}
         onAdd={() => { setEditing(undefined); setFormOpen(true); }}

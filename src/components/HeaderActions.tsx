@@ -5,6 +5,7 @@ export function HeaderActions({
   csvLocked,
   onAdd,
   onBackup,
+  onContact,
   onCsv,
   onRestore,
 }: {
@@ -12,6 +13,7 @@ export function HeaderActions({
   csvLocked: boolean;
   onAdd: () => void;
   onBackup: () => void;
+  onContact: () => void;
   onCsv: () => void;
   onRestore: (file?: File) => void;
 }) {
@@ -49,6 +51,10 @@ export function HeaderActions({
     setMenuOpen(false);
     onCsv();
   };
+  const contact = () => {
+    setMenuOpen(false);
+    onContact();
+  };
 
   return <div className="header-actions">
     <div className="desktop-data-actions" aria-label="データ操作">
@@ -77,6 +83,8 @@ export function HeaderActions({
         <button type="button" role="menuitem" className={csvLocked ? 'pro-locked' : ''} onClick={csv}>
           CSV出力{csvLocked && <span>Pro</span>}
         </button>
+        <p>サポート</p>
+        <button type="button" role="menuitem" onClick={contact}>問い合わせ</button>
       </div>}
     </div>
 

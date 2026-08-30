@@ -14,7 +14,7 @@ export function EquipmentStorageStatus({ source, loading, saving, error, onRetry
     return <section className="storage-status" aria-live="polite"><span className="auth-spinner" aria-hidden="true" />{loading ? '用品データを読み込み中…' : '用品データを保存中…'}</section>;
   }
   if (source === 'cloud') {
-    return <section className="storage-status cloud" aria-label="用品データの保存先"><div><strong>クラウド保存</strong><span>端末内の用品データは自動移行されていません。</span></div></section>;
+    return <section className="storage-status cloud" aria-label="用品データの保存先"><div><strong>クラウド保存（移行期間中）</strong><span>端末内の用品データは自動移行されていません。クラウド保存の正式な提供条件は今後変更される場合があります。</span></div></section>;
   }
   return null;
 }

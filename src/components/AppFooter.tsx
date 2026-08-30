@@ -5,6 +5,7 @@ const links: Array<[PublicInfoPage, string]> = [
   ['privacy', 'プライバシーポリシー'],
   ['terms', '利用規約'],
   ['contact', '問い合わせ'],
+  ['deletion', 'データ削除について'],
   ['plans', 'Free／Proについて'],
 ];
 
