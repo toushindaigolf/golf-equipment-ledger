@@ -1,6 +1,7 @@
 import type { User } from '@supabase/supabase-js';
 import { useCallback, useEffect, useState } from 'react';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
+import { trackGa4Event } from '../lib/ga4';
 import { authErrorMessage, signInWithEmail, signOut as requestSignOut, signUpWithEmail } from '../services/authService';
 
 export type AuthOperation = 'sign-in' | 'sign-up' | 'sign-out' | null;
@@ -52,6 +53,7 @@ export function useAuth() {
     setOperation('sign-in');
     try {
       await signInWithEmail(supabase, email, password);
+      trackGa4Event({ name: 'login' });
       setNotice('ログインしました。クラウド上の用品データを読み込みます。端末内データは削除されません。');
       return true;
     } catch (caught) {
@@ -67,6 +69,7 @@ export function useAuth() {
     setOperation('sign-up');
     try {
       const result = await signUpWithEmail(supabase, email, password);
+      trackGa4Event({ name: 'sign_up' });
       setNotice(result.needsEmailConfirmation
         ? '確認メールを送信しました。メール内のリンクを開いた後、ログインしてください。'
         : 'アカウントを作成し、ログインしました。');
@@ -84,6 +87,7 @@ export function useAuth() {
     setOperation('sign-out');
     try {
       await requestSignOut(supabase);
+      trackGa4Event({ name: 'logout' });
       setNotice('ログアウトしました。端末内の用品データは削除されていません。');
     } catch (caught) {
       setError(authErrorMessage(caught));

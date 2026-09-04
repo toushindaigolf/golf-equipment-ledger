@@ -1,4 +1,14 @@
+import { useEffect } from 'react';
+import { trackProNoticeView, type Ga4FeatureName } from '../lib/ga4';
+
 export type ProFeatureName = '詳細な購入分析' | 'CSV出力' | '高度な絞り込み' | 'クラウドへのデータ移行';
+
+export const proFeatureAnalyticsNames: Record<ProFeatureName, Ga4FeatureName> = {
+  '詳細な購入分析': 'detailed_analytics',
+  'CSV出力': 'csv_export',
+  '高度な絞り込み': 'advanced_filters',
+  'クラウドへのデータ移行': 'equipment_migration',
+};
 
 export function ProFeatureNotice({ feature, loading = false, compact = false, onDetails }: {
   feature: ProFeatureName;
@@ -6,6 +16,10 @@ export function ProFeatureNotice({ feature, loading = false, compact = false, on
   compact?: boolean;
   onDetails: (feature: ProFeatureName) => void;
 }) {
+  useEffect(() => {
+    if (!loading) trackProNoticeView(proFeatureAnalyticsNames[feature]);
+  }, [feature, loading]);
+
   return <section className={`pro-feature-notice${compact ? ' compact' : ''}`} aria-label={`${feature}の利用案内`}>
     <div>
       <p className="eyebrow">Pro機能</p>

@@ -26,6 +26,10 @@ describe('public release information', () => {
     expect(privacy).toContain('プライバシーポリシー');
     expect(privacy).toContain('等身大ゴルフ');
     expect(privacy).toContain('2026年8月30日');
+    expect(privacy).toContain('2026年9月4日');
+    expect(privacy).toContain('Google Analytics 4');
+    expect(privacy).toContain('Cookieまたはこれに類する識別子');
+    expect(privacy).toContain('用品情報、検索語をアクセス解析用のイベントとして意図的に送信しません');
     expect(privacy).toContain('一律の自動削除期限を設けていません');
     expect(terms).toContain('利用規約');
     expect(terms).toContain('Pro版を購入することはできません');

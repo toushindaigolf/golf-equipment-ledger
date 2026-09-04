@@ -1,6 +1,9 @@
+import { trackGa4Event } from '../lib/ga4';
+
 export type PublicInfoPage = 'privacy' | 'terms' | 'contact' | 'deletion' | 'help' | 'plans';
 
 const policyDate = '2026年8月30日';
+const policyUpdatedDate = '2026年9月4日';
 
 const pageTitles: Record<PublicInfoPage, string> = {
   privacy: 'プライバシーポリシー',
@@ -16,7 +19,7 @@ function PublicationDetails() {
     <p><strong>サービス・運営者</strong><span>等身大ゴルフ</span></p>
     <p><strong>問い合わせ先</strong><span>Googleフォーム</span></p>
     <p><strong>制定日</strong><span>{policyDate}</span></p>
-    <p><strong>最終更新日</strong><span>{policyDate}</span></p>
+    <p><strong>最終更新日</strong><span>{policyUpdatedDate}</span></p>
   </div>;
 }
 
@@ -32,8 +35,8 @@ function ContactActions({ contactFormUrl, deletionOnly = false }: {
   }
 
   return <div className="public-info-actions">
-    {!deletionOnly && <a className="secondary public-info-external" href={contactFormUrl} target="_blank" rel="noopener noreferrer">問い合わせる<span aria-hidden="true"> ↗</span></a>}
-    <a className={deletionOnly ? 'primary public-info-external' : 'secondary public-info-external'} href={contactFormUrl} target="_blank" rel="noopener noreferrer">データ削除を依頼する<span aria-hidden="true"> ↗</span></a>
+    {!deletionOnly && <a className="secondary public-info-external" href={contactFormUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackGa4Event({ name: 'contact_click' })}>問い合わせる<span aria-hidden="true"> ↗</span></a>}
+    <a className={deletionOnly ? 'primary public-info-external' : 'secondary public-info-external'} href={contactFormUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackGa4Event({ name: 'contact_click' })}>データ削除を依頼する<span aria-hidden="true"> ↗</span></a>
   </div>;
 }
 
@@ -47,14 +50,16 @@ function PrivacyPolicy({ contactFormUrl }: { contactFormUrl: string | null }) {
       <li>アカウント作成・ログインに用いるメールアドレスおよび認証用のユーザーID</li>
       <li>道具名、カテゴリー、メーカー、購入日・購入価格、売却日・売却価格、購入場所、購入理由、ステータス、メモなど、利用者が入力した用品情報</li>
       <li>問い合わせフォームから利用者が送信する内容</li>
+      <li>閲覧したページ、利用日時、ブラウザ・端末に関する情報、操作イベントなどのアクセス情報</li>
     </ul>
-    <p>現時点で、本サービス独自のアクセス解析、広告配信および広告Cookieは実装していません。</p>
+    <p>アクセス解析にはGoogle Analytics 4を利用します。Google Analytics 4は、Cookieまたはこれに類する識別子を使用する場合があります。本サービスは、メールアドレス、認証用のユーザーID、用品情報、検索語をアクセス解析用のイベントとして意図的に送信しません。</p>
 
     <h3>2. 利用目的</h3>
     <ul>
       <li>本サービスの提供、用品データの表示・保存、アカウント認証のため</li>
       <li>利用者が明示的に行う、端末内データからクラウドへの移行のため</li>
       <li>問い合わせ対応、不具合調査、不正利用への対応およびサービス改善のため</li>
+      <li>利用状況の把握、画面や機能の改善およびサービス運営上の判断のため</li>
     </ul>
 
     <h3>3. 保存場所と保存期間</h3>
@@ -67,8 +72,10 @@ function PrivacyPolicy({ contactFormUrl }: { contactFormUrl: string | null }) {
       <li>Supabase：アカウント認証、クラウド上の用品データおよび利用プラン情報の管理</li>
       <li>Cloudflare Pages：本サービスのWebアプリの配信</li>
       <li>Googleフォーム：問い合わせ、不具合報告およびデータ削除依頼の受付</li>
+      <li>Google Analytics 4：アクセス状況および機能の利用状況の分析</li>
     </ul>
-    <p>各外部サービスにおける情報の取り扱いには、各サービス提供者の規約・ポリシーも適用されます。</p>
+    <p>Google Analytics 4で収集された情報はGoogleに送信され、Googleの規約・ポリシーに基づいて取り扱われます。その他の外部サービスについても、各サービス提供者の規約・ポリシーが適用されます。</p>
+    <p>利用者はブラウザの設定でCookieを制限または削除できます。ただし、その設定はブラウザや端末ごとに行う必要があり、一部のサービス動作に影響する場合があります。</p>
 
     <h3>5. データの確認・削除</h3>
     <ul>
@@ -79,8 +86,9 @@ function PrivacyPolicy({ contactFormUrl }: { contactFormUrl: string | null }) {
     <p>アプリ内には、アカウントやクラウドデータを一括で即時削除する機能はありません。削除依頼の完了時期は、依頼内容の確認後に個別に案内します。</p>
     <ContactActions contactFormUrl={contactFormUrl} deletionOnly />
 
-    <h3>6. 安全管理とポリシーの変更</h3>
-    <p>不正アクセス、紛失、漏えい等を防ぐため、アクセス制御および外部サービスの安全機能を利用して合理的な安全管理に努めます。本ポリシーを変更する場合は、本サービス上で分かる方法により案内します。</p>
+    <h3>6. 安全管理・問い合わせ・ポリシーの変更</h3>
+    <p>不正アクセス、紛失、漏えい等を防ぐため、アクセス制御および外部サービスの安全機能を利用して合理的な安全管理に努めます。情報の取り扱いに関する問い合わせは、Googleフォームから受け付けます。</p>
+    <p>利用する解析項目や外部サービスの設定は、サービス改善や運用上の必要に応じて変更する場合があります。本ポリシーを変更する場合は、本サービス上で分かる方法により案内します。</p>
     <p className="public-info-review">公開前に、実際の運用内容および法的な表現について、必要に応じて専門家へ確認してください。</p>
   </>;
 }

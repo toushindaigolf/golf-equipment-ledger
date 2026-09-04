@@ -11,6 +11,7 @@ import { HeaderActions } from './components/HeaderActions';
 import {
   ProFeatureNotice,
   ProUpgradeDialog,
+  proFeatureAnalyticsNames,
   type ProFeatureName,
 } from './components/ProFeatureNotice';
 import { PublicInfoDialog, type PublicInfoPage } from './components/PublicInfoDialog';
@@ -28,6 +29,7 @@ import { contactFormUrl } from './lib/contact';
 import { parseEquipmentData } from './lib/equipmentData';
 import { canUseFeature } from './lib/featurePolicy';
 import { date, summary, yen } from './lib/format';
+import { trackGa4Event } from './lib/ga4';
 import type { GolfEquipment, SortOption } from './types/equipment';
 
 const sortLabels: Record<SortOption, string> = {
@@ -128,6 +130,16 @@ export default function App() {
     setFormOpen(false);
     setEditing(undefined);
   };
+  const openPublicInfo = (page: PublicInfoPage) => {
+    if (page === 'help') trackGa4Event({ name: 'help_open' });
+    if (page === 'privacy') trackGa4Event({ name: 'privacy_policy_open' });
+    if (page === 'terms') trackGa4Event({ name: 'terms_open' });
+    setPublicInfoPage(page);
+  };
+  const openProFeature = (feature: ProFeatureName) => {
+    trackGa4Event({ name: 'pro_feature_attempt', feature_name: proFeatureAnalyticsNames[feature] });
+    setUpgradeFeature(feature);
+  };
   const exportJson = () => {
     const blob = new Blob([JSON.stringify(items, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -136,10 +148,11 @@ export default function App() {
     anchor.download = `golf-equipment-backup-${new Date().toISOString().slice(0, 10)}.json`;
     anchor.click();
     URL.revokeObjectURL(url);
+    trackGa4Event({ name: 'backup_download' });
   };
   const exportCsv = () => {
     if (!canExportCsv) {
-      setUpgradeFeature('CSV出力');
+      openProFeature('CSV出力');
       return;
     }
     const csv = equipmentToCsv(items, categoryName, statusName);
@@ -185,7 +198,7 @@ export default function App() {
         addDisabled={!equipment.ready || equipment.saving}
         csvLocked={!canExportCsv}
         onBackup={exportJson}
-        onContact={() => setPublicInfoPage('contact')}
+        onContact={() => openPublicInfo('contact')}
         onCsv={exportCsv}
         onRestore={importJson}
         onAdd={() => { setEditing(undefined); setFormOpen(true); }}
@@ -207,7 +220,7 @@ export default function App() {
         feature="クラウドへのデータ移行"
         loading={entitlement.loading}
         compact
-        onDetails={setUpgradeFeature}
+        onDetails={openProFeature}
       />}
 
     <section className="summary">
@@ -226,7 +239,7 @@ export default function App() {
       : <ProFeatureNotice
         feature="詳細な購入分析"
         loading={entitlement.loading}
-        onDetails={setUpgradeFeature}
+        onDetails={openProFeature}
       />}
 
     <section className={`controls${canFilter ? '' : ' basic-controls'}`} aria-label="検索と絞り込み">
@@ -240,7 +253,7 @@ export default function App() {
         <label className="filter manufacturer-filter">メーカー
           <select value={manufacturer} onChange={event => setManufacturer(event.target.value)}><option value="">すべて</option>{manufacturerOptions}</select>
         </label>
-      </> : <button type="button" className="secondary pro-filter-button" onClick={() => setUpgradeFeature('高度な絞り込み')}>
+      </> : <button type="button" className="secondary pro-filter-button" onClick={() => openProFeature('高度な絞り込み')}>
         カテゴリ・メーカー・ステータスで絞り込む（Pro）
       </button>}
       <div className="search-group">
@@ -288,7 +301,7 @@ export default function App() {
       </>}
     </section>
 
-    <AppFooter onOpen={setPublicInfoPage} />
+    <AppFooter onOpen={openPublicInfo} />
 
     {formOpen && <EquipmentForm
       item={editing}

@@ -78,6 +78,19 @@ Preview環境では`VITE_APP_ENV=staging`を設定すると、画面上部に`ST
 
 `.env`、`.env.local`、`.env.production`などはGit管理対象外です。Publishable key以外の秘密鍵をフロントエンドへ設定しないでください。
 
+## Google Analytics 4
+
+本番サイトの利用状況を把握するため、Google公式の`gtag.js`によるGA4計測を用意しています。計測はproduction環境で明示的に有効化した場合だけ動作し、stagingとローカルでは停止します。
+
+```env
+VITE_GA_ENABLED=false
+VITE_GA_MEASUREMENT_ID=
+```
+
+Cloudflare PagesのProductionでは`VITE_GA_ENABLED=true`と本番用測定IDを設定し、Previewでは`false`かつ測定IDを空欄にしてください。用品名、価格、検索語、メールアドレス、ユーザーIDなどはGA4へ送信しません。
+
+設定方法は [`docs/ga4-setup.md`](docs/ga4-setup.md)、イベントと送信禁止データは [`docs/ga4-event-design.md`](docs/ga4-event-design.md)、公開後の確認は [`docs/ga4-verification-checklist.md`](docs/ga4-verification-checklist.md) を参照してください。
+
 ## 無料版の公開前確認
 
 利用規約、プライバシーポリシー、問い合わせ、データ削除について、使い方、Free／Pro説明はアプリ下部のフッターから確認できます。公開情報の内容、データ削除の案内、未実装の決済機能については [`docs/free-release-information.md`](docs/free-release-information.md) に整理しています。
